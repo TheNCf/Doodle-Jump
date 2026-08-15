@@ -23,6 +23,9 @@ namespace Game.Scripts.Core
         public void Initialize()
         {
             _inputActions.Enable();
+            
+            if (Accelerometer.current != null)
+                InputSystem.EnableDevice(Accelerometer.current);
 
             SubscribeToInputEvents();
         }
@@ -32,6 +35,8 @@ namespace Game.Scripts.Core
             _inputActions.Disable();
 
             UnsubscribeFromInputEvents();
+            
+            _inputActions.Dispose();
         }
 
         private void SubscribeToInputEvents()
