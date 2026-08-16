@@ -22,22 +22,27 @@ namespace Game.Scripts.Gameplay
                 .FromInstance(_cameraView)
                 .AsSingle();
 
+            Container
+                .BindInterfacesAndSelfTo<PlayerCharacterMover>()
+                .AsSingle()
+                .NonLazy();
+            
+            Container
+                .BindInterfacesAndSelfTo<PlayerCharacterBouncer>()
+                .AsSingle()
+                .NonLazy();
+
             PlayerCharacterView playerCharacterView = Container
                 .InstantiatePrefabForComponent<PlayerCharacterView>(
                     _playerCharacterViewPrefab, 
                     _startPoint.position,
                     Quaternion.identity, 
-                    null);
+                    null);//
             
             Container
                 .Bind<PlayerCharacterView>()
                 .FromInstance(playerCharacterView)
                 .AsSingle();
-
-            Container
-                .BindInterfacesAndSelfTo<PlayerCharacterMover>()
-                .AsSingle()
-                .NonLazy();
         }
     }
 }
