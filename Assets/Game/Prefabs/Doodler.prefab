@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 4389034296437976599}
+  _transform: {fileID: 3435703347684738792}
   _spriteRenderer: {fileID: 4866182495231323017}
   _maxSpeed: 8
   _speedInterpolation: 20
