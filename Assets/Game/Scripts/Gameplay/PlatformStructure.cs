@@ -6,7 +6,7 @@ namespace Game.Scripts.Gameplay
     [CreateAssetMenu(fileName = "Platform Structure", menuName = "Doodle Jump/Platform Structure")]
     public class PlatformStructure : ScriptableObject
     {
-        [field: SerializeField] private List<PlatformSpawnData> _data;
+        [SerializeField] private List<PlatformSpawnData> _data;
 
         public IReadOnlyList<PlatformSpawnData> Data => _data;
     }

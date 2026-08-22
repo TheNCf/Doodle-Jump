@@ -28,7 +28,10 @@ namespace Game.Scripts.Gameplay
 
         private void BindGameBalance()
         {
-            Container.Bind<GameBalance>().FromInstance(_gameBalance);
+            Container.Bind<GameBalance>()
+                .FromInstance(_gameBalance)
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindPlatfromObjectPool()
