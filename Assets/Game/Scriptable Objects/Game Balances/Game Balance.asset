@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96311426e1284f4a82f5bcce90f310a3, type: 3}
+  m_Name: Game Balance
+  m_EditorClassIdentifier: 
+  _tiers:
+  - _minHeight: -100
+    _nextSpawnElevationPercent: 25
+    _platformChances:
+    - _config: {fileID: 11400000, guid: 4a9a72a9af169374195c21225ea52da1, type: 2}
+      _weight: 95
+    - _config: {fileID: 11400000, guid: d259d3c3453204343b253d8132327d07, type: 2}
+      _weight: 5
+    _availableStructures: []
+  - _minHeight: 25
+    _nextSpawnElevationPercent: 50
+    _platformChances:
+    - _config: {fileID: 11400000, guid: 4a9a72a9af169374195c21225ea52da1, type: 2}
+      _weight: 85
+    - _config: {fileID: 11400000, guid: d259d3c3453204343b253d8132327d07, type: 2}
+      _weight: 5
+    - _config: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+      _weight: 10
+    _availableStructures: []

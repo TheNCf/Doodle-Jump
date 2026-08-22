@@ -12,7 +12,8 @@ namespace Game.Scripts.Gameplay
         [SerializeField] private Transform _startPoint;
         [SerializeField] private GameObject _platformPrefab;
         [SerializeField] private int _initialPoolSize = 20;
-        
+        [SerializeField] private GameBalance _gameBalance;
+
         public override void InstallBindings()
         {
             BindInputService();
@@ -20,8 +21,14 @@ namespace Game.Scripts.Gameplay
             BindPlayerCharacterMover();
             BindPlayerCharacterBouncer();
             BindPlatfromObjectPool();
+            BindGameBalance();
 
             BindCharacterView();
+        }
+
+        private void BindGameBalance()
+        {
+            Container.Bind<GameBalance>().FromInstance(_gameBalance);
         }
 
         private void BindPlatfromObjectPool()

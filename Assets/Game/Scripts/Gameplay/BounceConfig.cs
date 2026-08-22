@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.Scripts.Gameplay
 {
-    [CreateAssetMenu(fileName = "BounceConfig", menuName = "DoodleJump/Bounce Config")]
+    [CreateAssetMenu(fileName = "Bounce Config", menuName = "Doodle Jump/Bounce Config")]
     public class BounceConfig : ScriptableObject
     {
         [field: SerializeField] public BounceType Type { get; private set; }

@@ -223,7 +223,7 @@ TextureImporter:
         width: 124
         height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -231,6 +231,27 @@ TextureImporter:
       bones: []
       spriteID: 38309cbf194987d41920c35d0c6dba6c
       internalID: -615872605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Broken Falling Platform
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 657
+        width: 124
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5, y: 0.23}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3215d9b98b12a34ba3edc21cc602411
+      internalID: -847709069
       vertices: []
       indices: 
       edges: []
@@ -247,6 +268,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Activated Spring: 320221300
+      Broken Falling Platform: -847709069
       Broken Platform: -615872605
       Moving Platform: 641192067
       One-off Platform: -1786086127
