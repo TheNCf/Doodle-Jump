@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Game.Scripts.Gameplay
 {
-    public class BounceView : MonoBehaviour, IBounceable, IPoolableObject
+    public class BounceView : MonoBehaviour, IBounceable, IPoolableObject, IShiftable
     {
         [SerializeField] private BounceType _type;
         [SerializeField] private float _bounceMultiplier = 1.0f;
@@ -14,9 +14,9 @@ namespace Game.Scripts.Gameplay
         public float BounceMultiplier => _bounceMultiplier;
         
         [Inject]
-        public void Construct(MovingBehaviour movingBehaviour)
+        public void Construct(/*MovingBehaviour movingBehaviour,*/ )
         {
-            _movingBehaviour = movingBehaviour;
+            //_movingBehaviour = movingBehaviour;
         }
         
         public void Initialize(BounceConfig config)
@@ -39,6 +39,11 @@ namespace Game.Scripts.Gameplay
         public void ResetObject()
         {
             
+        }
+
+        public void ShiftDown(float distance)
+        {
+            transform.Translate(0, -distance, 0);
         }
     }
 }

@@ -22,13 +22,48 @@ namespace Game.Scripts.Gameplay
             BindPlayerCharacterBouncer();
             BindPlatfromObjectPool();
             BindGameBalance();
+            BindPlatformSpawner();
+            BindShiftRegistry();
+            BindObjectShifter();
+            BindLevelGenerator();
 
             BindCharacterView();
         }
 
+        private void BindLevelGenerator()
+        {
+            Container.BindInterfacesAndSelfTo<LevelGenerator>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindShiftRegistry()
+        {
+            Container
+                .BindInterfacesAndSelfTo<ShiftRegistry>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindObjectShifter()
+        {
+            Container
+                .BindInterfacesAndSelfTo<ObjectShifter>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindPlatformSpawner()
+        {
+            Container
+                .BindInterfacesAndSelfTo<PlatformSpawner>()
+                .AsSingle()
+                .NonLazy();
+        }
+
         private void BindGameBalance()
         {
-            Container.Bind<GameBalance>()
+            Container.BindInterfacesAndSelfTo<GameBalance>()
                 .FromInstance(_gameBalance)
                 .AsSingle()
                 .NonLazy();
@@ -43,17 +78,11 @@ namespace Game.Scripts.Gameplay
 
         private void BindCharacterView()
         {
-            PlayerCharacterView playerCharacterView = Container
-                .InstantiatePrefabForComponent<PlayerCharacterView>(
-                    _playerCharacterViewPrefab, 
-                    _startPoint.position,
-                    Quaternion.identity, 
-                    null);
-
             Container
                 .Bind<PlayerCharacterView>()
-                .FromInstance(playerCharacterView)
-                .AsSingle();
+                .FromComponentInNewPrefab(_playerCharacterViewPrefab)
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindPlayerCharacterBouncer()

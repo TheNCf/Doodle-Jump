@@ -14,6 +14,7 @@ namespace Game.Scripts.Gameplay
         [SerializeField] private float _speedInterpolation = 20.0f;
 
         [SerializeField] private float _jumpStrength = 8.0f;
+        [SerializeField] private float _heightToShift = 1.0f;
 
         public event Action<Collision2D> LegsOverlapping; 
     
@@ -26,10 +27,19 @@ namespace Game.Scripts.Gameplay
         public float SpeedInterpolation => _speedInterpolation;
         
         public float JumpStrength => _jumpStrength;
+        public float HeightToShift => _heightToShift;
 
         private void OnCollisionEnter2D(Collision2D other)
         {
             LegsOverlapping?.Invoke(other);
+        }
+
+        public float GetJumpHeight()
+        {
+            float gravity = Mathf.Abs(Physics2D.gravity.y);
+            float effectiveGravity = gravity * _rigidbody.gravityScale; 
+            float height = (_jumpStrength * _jumpStrength) / (2.0f * effectiveGravity);
+            return height;
         }
     }
 }

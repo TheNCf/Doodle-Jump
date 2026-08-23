@@ -46,11 +46,11 @@ namespace Game.Scripts.Gameplay
             if (newVelocity.x < 0)
                 _spriteRenderer.flipX = true;
 
-            if (_transform.position.x > _spriteRenderer.size.x / 2 + _cameraView.CameraSize.x)
-                _transform.Translate(-(_spriteRenderer.size.x / 2 + _cameraView.CameraSize.x) * 2, 0, 0);
+            if (_transform.position.x > _spriteRenderer.size.x / 2 + _cameraView.Size.x)
+                _transform.Translate(-(_spriteRenderer.size.x / 2 + _cameraView.Size.x) * 2, 0, 0);
 
-            if (_transform.position.x < -_spriteRenderer.size.x / 2 - _cameraView.CameraSize.x)
-                _transform.Translate((_spriteRenderer.size.x / 2 + _cameraView.CameraSize.x) * 2, 0, 0);
+            if (_transform.position.x < -_spriteRenderer.size.x / 2 - _cameraView.Size.x)
+                _transform.Translate((_spriteRenderer.size.x / 2 + _cameraView.Size.x) * 2, 0, 0);
         }
     }
 }

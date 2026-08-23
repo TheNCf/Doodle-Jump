@@ -13,21 +13,23 @@ MonoBehaviour:
   m_Name: Game Balance
   m_EditorClassIdentifier: 
   _tiers:
-  - _minHeight: -100
-    _nextSpawnElevationPercent: 25
+  - <MinHeight>k__BackingField: -100
+    _nextSpawnMinElevationPercent: 20
+    _nextSpawnMaxElevationPercent: 30
     _platformChances:
-    - _config: {fileID: 11400000, guid: 4a9a72a9af169374195c21225ea52da1, type: 2}
-      _weight: 95
-    - _config: {fileID: 11400000, guid: d259d3c3453204343b253d8132327d07, type: 2}
-      _weight: 5
+    - <Config>k__BackingField: {fileID: 11400000, guid: 4a9a72a9af169374195c21225ea52da1, type: 2}
+      <Weight>k__BackingField: 95
+    - <Config>k__BackingField: {fileID: 11400000, guid: d259d3c3453204343b253d8132327d07, type: 2}
+      <Weight>k__BackingField: 5
     _availableStructures: []
-  - _minHeight: 25
-    _nextSpawnElevationPercent: 50
+  - <MinHeight>k__BackingField: 50
+    _nextSpawnMinElevationPercent: 30
+    _nextSpawnMaxElevationPercent: 55
     _platformChances:
-    - _config: {fileID: 11400000, guid: 4a9a72a9af169374195c21225ea52da1, type: 2}
-      _weight: 85
-    - _config: {fileID: 11400000, guid: d259d3c3453204343b253d8132327d07, type: 2}
-      _weight: 5
-    - _config: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
-      _weight: 10
+    - <Config>k__BackingField: {fileID: 11400000, guid: 4a9a72a9af169374195c21225ea52da1, type: 2}
+      <Weight>k__BackingField: 85
+    - <Config>k__BackingField: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+      <Weight>k__BackingField: 10
+    - <Config>k__BackingField: {fileID: 11400000, guid: d259d3c3453204343b253d8132327d07, type: 2}
+      <Weight>k__BackingField: 5
     _availableStructures: []

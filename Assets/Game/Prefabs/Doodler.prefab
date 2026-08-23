@@ -59,9 +59,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &2148215191283319490
 CapsuleCollider2D:
@@ -159,9 +159,10 @@ MonoBehaviour:
   _transform: {fileID: 3435703347684738792}
   _spriteRenderer: {fileID: 4866182495231323017}
   _legCollider: {fileID: 5386899955787551265}
-  _maxSpeed: 8
+  _maxSpeed: 5
   _speedInterpolation: 20
   _jumpStrength: 8
+  _heightToShift: 1
 --- !u!1 &7176407988149185513
 GameObject:
   m_ObjectHideFlags: 0
