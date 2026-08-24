@@ -26,8 +26,16 @@ namespace Game.Scripts.Gameplay
             BindShiftRegistry();
             BindObjectShifter();
             BindLevelGenerator();
+            BindMovingBehaviour();
 
             BindCharacterView();
+        }
+
+        private void BindMovingBehaviour()
+        {
+            Container
+                .Bind<MovingBehaviour>()
+                .AsTransient();
         }
 
         private void BindLevelGenerator()
@@ -120,8 +128,8 @@ namespace Game.Scripts.Gameplay
         private ObjectPool<BounceView> CreatePlatformPool(InjectContext context)
         {
             Func<BounceView> createFunc = () => Container.InstantiatePrefabForComponent<BounceView>(_platformPrefab);
-            Action<BounceView> onGet = (platform) => platform.gameObject.SetActive(true);
-            Action<BounceView> onRelease = (platform) => platform.gameObject.SetActive(false);
+            Action<BounceView> onGet = (platform) => platform.Activate();
+            Action<BounceView> onRelease = (platform) => platform.ResetObject();
             Action<BounceView> onClear = (platform) => 
             {
                 if (platform != null && platform.gameObject != null)

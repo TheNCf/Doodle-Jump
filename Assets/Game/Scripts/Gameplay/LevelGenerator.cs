@@ -31,7 +31,7 @@ namespace Game.Scripts.Gameplay
         
         public void Initialize()
         {
-            _spawnHeight = _cameraView.Size.y * 2f;
+            _spawnHeight = _cameraView.Size.y;
 
             OnHeightChanged(_objectShifter.RelativeHeight);
             _objectShifter.RelativeHeightChanged += OnHeightChanged;
@@ -46,7 +46,7 @@ namespace Game.Scripts.Gameplay
         {
             while (height > _spawnTrigger)
             {
-                float randomX = Random.Range(-_cameraView.Size.x, _cameraView.Size.x);
+                float randomX = Random.Range(-_cameraView.Size.x, _cameraView.Size.x) / 2.0f;
                 Vector2 position = new Vector2(randomX, _spawnHeight + _spawnTrigger);
                 
                 _platformSpawner.SpawnSingle(GetRandomBounceConfig(), position);
