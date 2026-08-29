@@ -35,11 +35,13 @@ namespace Game.Scripts.Gameplay
 
             OnHeightChanged(_objectShifter.RelativeHeight);
             _objectShifter.RelativeHeightChanged += OnHeightChanged;
+            _objectShifter.ShiftedByValue += OnShift;
         }
 
         public void Dispose()
         {
             _objectShifter.RelativeHeightChanged -= OnHeightChanged;
+            _objectShifter.ShiftedByValue -= OnShift;
         }
 
         private void OnHeightChanged(float height)
@@ -49,7 +51,7 @@ namespace Game.Scripts.Gameplay
                 float randomX = Random.Range(-_cameraView.Size.x, _cameraView.Size.x) / 2.0f;
                 Vector2 position = new Vector2(randomX, _spawnHeight + _spawnTrigger);
                 
-                _platformSpawner.SpawnSingle(GetRandomBounceConfig(), position);
+                _platformSpawner.SpawnSingle(GetRandomBounceConfig(_objectShifter.TotalHeight), position);
 
                 float jumpHeight = _playerCharacterView.GetJumpHeight();
                 float elevationPercent = Random.Range(_currentDifficulty.NextSpawnMinElevationPercent, 
@@ -67,9 +69,14 @@ namespace Game.Scripts.Gameplay
             }
         }
 
-        private BounceConfig GetRandomBounceConfig()
+        private void OnShift(float shiftValue)
         {
-            _currentDifficulty = _gameBalance.GetTier(_spawnTrigger);
+            _spawnTrigger -= shiftValue;
+        }
+
+        private BounceConfig GetRandomBounceConfig(float totalHeight)
+        {
+            _currentDifficulty = _gameBalance.GetTier(totalHeight);
 
             float totalWeight = 0;
 

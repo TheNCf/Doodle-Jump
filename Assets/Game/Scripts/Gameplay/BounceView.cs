@@ -48,7 +48,7 @@ namespace Game.Scripts.Gameplay
 
         public void Activate()
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(true);
         }
 
         public void ResetObject()

@@ -9,7 +9,6 @@ namespace Game.Scripts.Gameplay
     {
         [SerializeField] private CameraView _cameraView;
         [SerializeField] private PlayerCharacterView _playerCharacterViewPrefab;
-        [SerializeField] private Transform _startPoint;
         [SerializeField] private GameObject _platformPrefab;
         [SerializeField] private int _initialPoolSize = 20;
         [SerializeField] private GameBalance _gameBalance;
@@ -127,7 +126,12 @@ namespace Game.Scripts.Gameplay
         
         private ObjectPool<BounceView> CreatePlatformPool(InjectContext context)
         {
-            Func<BounceView> createFunc = () => Container.InstantiatePrefabForComponent<BounceView>(_platformPrefab);
+            Func<BounceView> createFunc = () =>
+            {
+                BounceView spawnedPlatform = Container.InstantiatePrefabForComponent<BounceView>(_platformPrefab);
+                spawnedPlatform.gameObject.SetActive(false);
+                return spawnedPlatform;
+            };
             Action<BounceView> onGet = (platform) => platform.Activate();
             Action<BounceView> onRelease = (platform) => platform.ResetObject();
             Action<BounceView> onClear = (platform) => 

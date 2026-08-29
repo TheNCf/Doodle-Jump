@@ -159,7 +159,7 @@ MonoBehaviour:
   _transform: {fileID: 3435703347684738792}
   _spriteRenderer: {fileID: 4866182495231323017}
   _legCollider: {fileID: 5386899955787551265}
-  _maxSpeed: 5
+  _maxSpeed: 8
   _speedInterpolation: 20
   _jumpStrength: 8
   _heightToShift: 1
