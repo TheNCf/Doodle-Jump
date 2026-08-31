@@ -21,13 +21,21 @@ namespace Game.Scripts.Gameplay
             BindPlayerCharacterBouncer();
             BindPlatfromObjectPool();
             BindGameBalance();
+            BindObjectShifter();
+            BindPlatformDisposer();
             BindPlatformSpawner();
             BindShiftRegistry();
-            BindObjectShifter();
             BindLevelGenerator();
             BindMovingBehaviour();
 
             BindCharacterView();
+        }
+
+        private void BindPlatformDisposer()
+        {
+            Container.BindInterfacesAndSelfTo<PlatformDisposer>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindMovingBehaviour()
@@ -40,8 +48,7 @@ namespace Game.Scripts.Gameplay
         private void BindLevelGenerator()
         {
             Container.BindInterfacesAndSelfTo<LevelGenerator>()
-                .AsSingle()
-                .NonLazy();
+                .AsSingle();
         }
 
         private void BindShiftRegistry()
@@ -64,8 +71,7 @@ namespace Game.Scripts.Gameplay
         {
             Container
                 .BindInterfacesAndSelfTo<PlatformSpawner>()
-                .AsSingle()
-                .NonLazy();
+                .AsSingle();
         }
 
         private void BindGameBalance()

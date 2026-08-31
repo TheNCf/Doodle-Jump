@@ -15,7 +15,7 @@ namespace Game.Scripts.Gameplay
         private PlayerCharacterView _playerCharacterView;
 
         private float _spawnTrigger = -15.0f;
-        private float _spawnHeight;
+        private float _spawnAdditionalHeight;
         
         private DifficultyTier _currentDifficulty;
 
@@ -29,29 +29,32 @@ namespace Game.Scripts.Gameplay
             _playerCharacterView = playerCharacterView;
         }
         
+        public float SpawnAdditionalHeight => _spawnAdditionalHeight;
+        
         public void Initialize()
         {
-            _spawnHeight = _cameraView.Size.y;
+            _spawnAdditionalHeight = _cameraView.Size.y;
 
             OnHeightChanged(_objectShifter.RelativeHeight);
             _objectShifter.RelativeHeightChanged += OnHeightChanged;
-            _objectShifter.ShiftedByValue += OnShift;
+            _objectShifter.ReturnedBackByValue += OnReturn;
         }
 
         public void Dispose()
         {
             _objectShifter.RelativeHeightChanged -= OnHeightChanged;
-            _objectShifter.ShiftedByValue -= OnShift;
+            _objectShifter.ReturnedBackByValue -= OnReturn;
         }
 
         private void OnHeightChanged(float height)
         {
+            Debug.Log($"Relative Height: {height}, SpawnTrigger: {_spawnTrigger}");
+            
             while (height > _spawnTrigger)
             {
                 float randomX = Random.Range(-_cameraView.Size.x, _cameraView.Size.x) / 2.0f;
-                Vector2 position = new Vector2(randomX, _spawnHeight + _spawnTrigger);
-                
-                _platformSpawner.SpawnSingle(GetRandomBounceConfig(_objectShifter.TotalHeight), position);
+                Vector2 position = new Vector2(randomX, _spawnAdditionalHeight + _spawnTrigger);
+                _platformSpawner.SpawnSingle(GetRandomBounceConfig(_objectShifter.TotalHeight), position, _spawnTrigger, _spawnAdditionalHeight);
 
                 float jumpHeight = _playerCharacterView.GetJumpHeight();
                 float elevationPercent = Random.Range(_currentDifficulty.NextSpawnMinElevationPercent, 
@@ -69,7 +72,7 @@ namespace Game.Scripts.Gameplay
             }
         }
 
-        private void OnShift(float shiftValue)
+        private void OnReturn(float shiftValue)
         {
             _spawnTrigger -= shiftValue;
         }

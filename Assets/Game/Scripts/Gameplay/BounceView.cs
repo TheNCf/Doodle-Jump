@@ -15,9 +15,13 @@ namespace Game.Scripts.Gameplay
         private MovingBehaviour _movingBehaviour;
         private TickableManager _tickableManager;
         
+        private float _distanceFromCenter;
+        
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public float BounceMultiplier => _bounceMultiplier;
         public float HorizontalSpeed => _horizontalSpeed;
+        public float SpawnHeight { get; private set; }
+        public float DistanceFromCenter => _distanceFromCenter;
         
         [Inject]
         public void Construct(MovingBehaviour movingBehaviour, TickableManager tickableManager)
@@ -28,16 +32,17 @@ namespace Game.Scripts.Gameplay
             _movingBehaviour.Initialize(this);
         }
         
-        public void Initialize(BounceConfig config)
+        public void Initialize(BounceConfig config, float spawnHeight, float distanceFromCenter)
         {
             _config = config;
+            SpawnHeight = spawnHeight;
+            _distanceFromCenter = distanceFromCenter;
 
             ApplyConfig();
             
             gameObject.SetActive(true);
-            
-            if (_type == BounceType.Moving)
-                _tickableManager.Add(_movingBehaviour);
+
+            _movingBehaviour.IsEnabled = _type == BounceType.Moving;
         }
 
         private void ApplyConfig()
@@ -53,12 +58,13 @@ namespace Game.Scripts.Gameplay
 
         public void ResetObject()
         {
-            _tickableManager.Remove(_movingBehaviour);
+            _movingBehaviour.IsEnabled = false;
             gameObject.SetActive(false);
         }
 
         public void ShiftDown(float distance)
         {
+            SpawnHeight -= distance;
             transform.Translate(0, -distance, 0);
         }
     }

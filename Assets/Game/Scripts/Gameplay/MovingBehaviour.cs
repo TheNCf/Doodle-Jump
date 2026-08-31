@@ -21,6 +21,8 @@ namespace Game.Scripts.Gameplay
             
             _cameraHalfWidth = _cameraView.Size.x / 2.0f;
         }
+        
+        public bool IsEnabled { get; set; }
 
         public void Initialize(BounceView bounceView)
         {
@@ -34,6 +36,9 @@ namespace Game.Scripts.Gameplay
 
         public void Tick()
         {
+            if (IsEnabled == false) 
+                return;
+            
             if (_isInitialized == false || _bounceView is null)
                 return;
             

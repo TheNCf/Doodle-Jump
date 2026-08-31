@@ -8,6 +8,6 @@ namespace Game.Scripts.Core
         
         public Transform Transform => _camera.transform;
 
-        public Vector2 Size => _camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height)) * 2;
+        public Vector2 Size => new Vector3(_camera.aspect, 1) * _camera.orthographicSize * 2f;
     }
 }
