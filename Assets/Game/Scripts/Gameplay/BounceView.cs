@@ -30,6 +30,7 @@ namespace Game.Scripts.Gameplay
             _tickableManager = tickableManager;
             
             _movingBehaviour.Initialize(this);
+            _tickableManager.Add(_movingBehaviour);
         }
         
         public void Initialize(BounceConfig config, float spawnHeight, float distanceFromCenter)
