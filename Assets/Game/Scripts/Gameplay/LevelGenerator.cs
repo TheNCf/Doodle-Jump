@@ -48,8 +48,6 @@ namespace Game.Scripts.Gameplay
 
         private void OnHeightChanged(float height)
         {
-            Debug.Log($"Relative Height: {height}, SpawnTrigger: {_spawnTrigger}");
-            
             while (height > _spawnTrigger)
             {
                 float randomX = Random.Range(-_cameraView.Size.x, _cameraView.Size.x) / 2.0f;

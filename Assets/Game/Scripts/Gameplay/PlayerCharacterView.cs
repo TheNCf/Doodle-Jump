@@ -16,7 +16,7 @@ namespace Game.Scripts.Gameplay
         [SerializeField] private float _jumpStrength = 8.0f;
         [SerializeField] private float _heightToShift = 1.0f;
 
-        public event Action<Collision2D> LegsOverlapping; 
+        public event Action<Collision2D> LegsColliding;
     
         public Rigidbody2D Rigidbody => _rigidbody;
         public Transform Transform => _transform;
@@ -31,7 +31,7 @@ namespace Game.Scripts.Gameplay
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            LegsOverlapping?.Invoke(other);
+            LegsColliding?.Invoke(other);
         }
 
         public float GetJumpHeight()

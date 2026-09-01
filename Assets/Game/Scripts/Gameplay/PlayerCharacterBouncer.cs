@@ -17,7 +17,7 @@ namespace Game.Scripts.Gameplay
             _rigidbody = _playerCharacterView.Rigidbody;
             _legCollider = _playerCharacterView.LegCollider;
 
-            _playerCharacterView.LegsOverlapping += Bounce;
+            _playerCharacterView.LegsColliding += Bounce;
         }
 
         public void FixedTick()

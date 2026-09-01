@@ -12,9 +12,9 @@ namespace Game.Scripts.Gameplay
         private float _bounceMultiplier = 1.0f;
         private float _horizontalSpeed = 1.0f;
 
+        public BounceConfig Config => _config;
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public float BounceMultiplier => _bounceMultiplier;
-        public float HorizontalSpeed => _horizontalSpeed;
         
         public void Initialize(BounceConfig config)
         {
