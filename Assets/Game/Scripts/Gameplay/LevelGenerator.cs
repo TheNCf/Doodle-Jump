@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Game.Scripts.Gameplay
 {
-    public class LevelGenerator : IInitializable, IDisposable
+    public class LevelGenerator : IInitializable
     {
         private GameBalance _gameBalance;
         private CameraView _cameraView;
@@ -54,7 +54,8 @@ namespace Game.Scripts.Gameplay
             {
                 float randomX = Random.Range(-_cameraView.Size.x, _cameraView.Size.x) / 2.0f;
                 Vector2 position = new Vector2(randomX, _spawnAdditionalHeight + _spawnTrigger);
-                _platformSpawner.SpawnSingle(GetRandomBounceConfig(_objectShifter.TotalHeight), position, _spawnTrigger, _spawnAdditionalHeight);
+                BounceConfig config = GetRandomBounceConfig(_objectShifter.TotalHeight);
+                _platformSpawner.SpawnSingle(config, position, _spawnTrigger, _spawnAdditionalHeight);
 
                 float jumpHeight = _playerCharacterView.GetJumpHeight();
                 float elevationPercent = Random.Range(_currentDifficulty.NextSpawnMinElevationPercent, 
@@ -68,7 +69,8 @@ namespace Game.Scripts.Gameplay
                     break; 
                 }
                 
-                _spawnTrigger += elevation;
+                if (config.Type != BounceType.Broken)
+                    _spawnTrigger += elevation;
             }
         }
 

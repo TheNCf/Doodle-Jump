@@ -9,7 +9,7 @@ namespace Game.Scripts.Gameplay
     {
         [SerializeField] private CameraView _cameraView;
         [SerializeField] private PlayerCharacterView _playerCharacterViewPrefab;
-        [SerializeField] private GameObject _platformPrefab;
+        [SerializeField] private PlatformView _platformPrefab;
         [SerializeField] private int _initialPoolSize = 20;
         [SerializeField] private GameBalance _gameBalance;
 
@@ -84,7 +84,7 @@ namespace Game.Scripts.Gameplay
 
         private void BindPlatfromObjectPool()
         {
-            Container.Bind<ObjectPool<BounceView>>()
+            Container.Bind<ObjectPool<PlatformView>>()
                 .FromMethod(CreatePlatformPool)
                 .AsSingle();
         }
@@ -130,23 +130,23 @@ namespace Game.Scripts.Gameplay
                 .NonLazy();
         }
         
-        private ObjectPool<BounceView> CreatePlatformPool(InjectContext context)
+        private ObjectPool<PlatformView> CreatePlatformPool(InjectContext context)
         {
-            Func<BounceView> createFunc = () =>
+            Func<PlatformView> createFunc = () =>
             {
-                BounceView spawnedPlatform = Container.InstantiatePrefabForComponent<BounceView>(_platformPrefab);
+                PlatformView spawnedPlatform = Container.InstantiatePrefabForComponent<PlatformView>(_platformPrefab);
                 spawnedPlatform.gameObject.SetActive(false);
                 return spawnedPlatform;
             };
-            Action<BounceView> onGet = (platform) => platform.Activate();
-            Action<BounceView> onRelease = (platform) => platform.ResetObject();
-            Action<BounceView> onClear = (platform) => 
+            Action<PlatformView> onGet = (platform) => platform.Activate();
+            Action<PlatformView> onRelease = (platform) => platform.ResetObject();
+            Action<PlatformView> onClear = (platform) => 
             {
                 if (platform != null && platform.gameObject != null)
                     Destroy(platform.gameObject);
             };
 
-            return new ObjectPool<BounceView>(createFunc, onGet, onRelease, onClear, _initialPoolSize);
+            return new ObjectPool<PlatformView>(createFunc, onGet, onRelease, onClear, _initialPoolSize);
         }
     }
 }

@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 8881048421795677344}
   - component: {fileID: 8069669014895223249}
   - component: {fileID: 5397536006114517598}
+  - component: {fileID: 6546128709145142648}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -229,7 +230,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 8881048421795677344}
-  _type: 0
-  _bounceMultiplier: 1
-  _config: {fileID: 0}
-  _horizontalSpeed: 1
+--- !u!114 &6546128709145142648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728911842771111828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8607ed45494d6c83b8a0e2a524611b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

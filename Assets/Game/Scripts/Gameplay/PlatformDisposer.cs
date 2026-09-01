@@ -10,7 +10,7 @@ namespace Game.Scripts.Gameplay
         private ObjectShifter _objectShifter;
         private CameraView _cameraView;
         
-        private List<BounceView> _trackedPlatforms = new List<BounceView>();
+        private List<IDisposable> _trackedObjects = new List<IDisposable>();
         
         public PlatformDisposer(ObjectShifter objectShifter, CameraView cameraView)
         {
@@ -20,29 +20,29 @@ namespace Game.Scripts.Gameplay
             _objectShifter.RelativeHeightChanged += CheckForDisposal;
         }
 
-        public event Action<BounceView> MarkedForDisposal;
+        public event Action<IDisposable> MarkedForDisposal;
 
-        public void AddForTracking(BounceView platform)
+        public void AddForTracking(IDisposable obj)
         {
-            _trackedPlatforms.Add(platform);
+            _trackedObjects.Add(obj);
         }
 
-        public void RemoveFromTracking(BounceView platform)
+        public void RemoveFromTracking(IDisposable obj)
         {
-            _trackedPlatforms.Remove(platform);
+            _trackedObjects.Remove(obj);
         }
         
         private void CheckForDisposal(float _)
         {
-            if (_trackedPlatforms.Count == 0)
+            if (_trackedObjects.Count == 0)
                 return;
             
-            for (int i = _trackedPlatforms.Count - 1; i >= 0; i--)
+            for (int i = _trackedObjects.Count - 1; i >= 0; i--)
             {
-                BounceView platform = _trackedPlatforms[i];
+                IDisposable obj = _trackedObjects[i];
                 
-                if (platform.SpawnHeight < _objectShifter.RelativeHeight - _cameraView.Size.y / 2 - platform.DistanceFromCenter)
-                    MarkedForDisposal?.Invoke(platform);
+                if (obj.SpawnHeight < _objectShifter.RelativeHeight - _cameraView.Size.y / 2 - obj.DistanceFromCenter)
+                    MarkedForDisposal?.Invoke(obj);
             }
         }
     }

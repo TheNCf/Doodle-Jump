@@ -8,9 +8,9 @@ namespace Game.Scripts.Gameplay
         private ShiftRegistry _shiftRegistry;
         private PlatformDisposer _disposer;
         
-        private ObjectPool<BounceView> _pool;
+        private ObjectPool<PlatformView> _pool;
 
-        public PlatformSpawner(ObjectPool<BounceView> pool, ShiftRegistry shiftRegistry, PlatformDisposer disposer)
+        public PlatformSpawner(ObjectPool<PlatformView> pool, ShiftRegistry shiftRegistry, PlatformDisposer disposer)
         {
             _shiftRegistry = shiftRegistry;
             _disposer = disposer;
@@ -20,9 +20,9 @@ namespace Game.Scripts.Gameplay
             _disposer.MarkedForDisposal += Release;
         }
 
-        public BounceView SpawnSingle(BounceConfig config, Vector2 position, float spawnHeight, float distanceFromCenter)
+        public PlatformView SpawnSingle(BounceConfig config, Vector2 position, float spawnHeight, float distanceFromCenter)
         {
-            BounceView view = _pool.Get();
+            PlatformView view = _pool.Get();
             view.Initialize(config, spawnHeight, distanceFromCenter);
             view.transform.position = position;
             _shiftRegistry.Register(view);
@@ -40,8 +40,12 @@ namespace Game.Scripts.Gameplay
                     distanceFromCenter + data.RelativePosition.y);
         }
 
-        private void Release(BounceView platform)
+        private void Release(IDisposable obj)
         {
+            if (obj is PlatformView == false)
+                return;
+            
+            PlatformView platform = (PlatformView)obj;
             _disposer.RemoveFromTracking(platform);
             _shiftRegistry.Unregister(platform);
             _pool.Release(platform);
