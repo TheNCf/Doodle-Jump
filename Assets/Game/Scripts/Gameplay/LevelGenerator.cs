@@ -16,6 +16,7 @@ namespace Game.Scripts.Gameplay
 
         private float _spawnTrigger = -15.0f;
         private float _spawnAdditionalHeight;
+        private float _elevationLowering = 0.0f;
         
         private DifficultyTier _currentDifficulty;
 
@@ -59,7 +60,7 @@ namespace Game.Scripts.Gameplay
                 float elevationPercent = Random.Range(_currentDifficulty.NextSpawnMinElevationPercent, 
                     _currentDifficulty.NextSpawnMaxElevationPercent);
                 
-                float elevation = jumpHeight * elevationPercent / 100.0f;
+                float elevation = (jumpHeight - _elevationLowering) * elevationPercent / 100.0f;
                 
                 if (elevation <= 0f)
                 {
@@ -67,8 +68,11 @@ namespace Game.Scripts.Gameplay
                     break; 
                 }
                 
-                if (config.Type != BounceType.Broken)
-                    _spawnTrigger += elevation;
+                _spawnTrigger += elevation;
+                _elevationLowering = 0;
+
+                if (config.Type == BounceType.Broken)
+                    _elevationLowering =  elevation;
             }
         }
 
