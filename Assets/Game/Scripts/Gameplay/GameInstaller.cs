@@ -19,7 +19,7 @@ namespace Game.Scripts.Gameplay
             BindCameraView();
             BindPlayerCharacterMover();
             BindPlayerCharacterBouncer();
-            BindPlatfromObjectPool();
+            BindPlatformObjectPool();
             BindGameBalance();
             BindObjectShifter();
             BindPlatformDisposer();
@@ -82,10 +82,16 @@ namespace Game.Scripts.Gameplay
                 .NonLazy();
         }
 
-        private void BindPlatfromObjectPool()
+        private void BindPlatformObjectPool()
         {
             Container.Bind<ObjectPool<PlatformView>>()
-                .FromMethod(CreatePlatformPool)
+                .FromMethod(ctx => ObjectPoolFactory.CreateMonoPool(
+                    Container, 
+                    _platformPrefab, 
+                    _initialPoolSize,
+                    onGet: platform => platform.Activate(),
+                    onRelease: platform => platform.ResetObject()
+                ))
                 .AsSingle();
         }
 
