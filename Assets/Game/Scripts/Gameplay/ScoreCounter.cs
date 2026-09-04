@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Scripts.Gameplay
@@ -7,7 +8,7 @@ namespace Game.Scripts.Gameplay
     {
         private ObjectShifter _shifter;
 
-        private float _scoreMultiplier = 10.0f;
+        private float _scoreMultiplier = 20.0f;
         
         public event Action<int> ScoreChanged;
 

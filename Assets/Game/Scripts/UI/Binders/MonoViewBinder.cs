@@ -1,6 +1,6 @@
-/*using System;
+using System;
 using MVVM;
-using Sirenix.OdinInspector;
+//using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using Zenject;
@@ -20,15 +20,15 @@ namespace SampleGame
         [SerializeField]
         private BindingMode viewBinding;
 
-        [ShowIf(nameof(viewBinding), BindingMode.FromInstance)]
+        //[ShowIf(nameof(viewBinding), BindingMode.FromInstance)]
         [SerializeField]
         private Object view;
 
-        [ShowIf("@this.viewBinding == BindingMode.FromResolve || this.viewBinding == BindingMode.FromResolveId")]
+        //[ShowIf("@this.viewBinding == BindingMode.FromResolve || this.viewBinding == BindingMode.FromResolveId")]
         [SerializeField]
         private MonoScript viewType;
 
-        [ShowIf(nameof(viewBinding), BindingMode.FromResolveId)]
+        //[ShowIf(nameof(viewBinding), BindingMode.FromResolveId)]
         [SerializeField]
         private string viewId;
 
@@ -36,15 +36,15 @@ namespace SampleGame
         [SerializeField]
         private BindingMode viewModelBinding;
 
-        [ShowIf(nameof(viewModelBinding), BindingMode.FromInstance)]
+        //[ShowIf(nameof(viewModelBinding), BindingMode.FromInstance)]
         [SerializeField]
         private Object viewModel;
 
-        [ShowIf("@this.viewModelBinding == BindingMode.FromResolve || this.viewModelBinding == BindingMode.FromResolveId")]
+        //[ShowIf("@this.viewModelBinding == BindingMode.FromResolve || this.viewModelBinding == BindingMode.FromResolveId")]
         [SerializeField]
         private MonoScript viewModelType;
 
-        [ShowIf(nameof(viewModelBinding), BindingMode.FromResolveId)]
+        //[ShowIf(nameof(viewModelBinding), BindingMode.FromResolveId)]
         [SerializeField]
         private string viewModelId;
 
@@ -85,8 +85,8 @@ namespace SampleGame
                 BindingMode.FromResolveId => this.diContainer.ResolveId(this.viewModelType.GetClass(), this.viewModelId),
                 _ => throw new Exception($"Binding type of view {this.viewBinding} is not found!")
             };
-
+            
             return BinderFactory.CreateComposite(view, model);
         }
     }
-}*/
+}
