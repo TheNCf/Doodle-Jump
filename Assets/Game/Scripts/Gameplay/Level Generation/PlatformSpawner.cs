@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Game.Scripts.Gameplay
+namespace Game.Scripts.Gameplay.LevelGeneration
 {
     public class PlatformSpawner
     {

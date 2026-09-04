@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Game.Scripts.Core;
-using UnityEngine;
 
-namespace Game.Scripts.Gameplay
+namespace Game.Scripts.Gameplay.LevelGeneration
 {
     public class PlatformDisposer
     {

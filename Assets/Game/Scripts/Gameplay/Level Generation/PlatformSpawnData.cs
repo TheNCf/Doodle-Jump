@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Game.Scripts.Gameplay
+namespace Game.Scripts.Gameplay.LevelGeneration
 {
     [Serializable]
     public struct PlatformSpawnData

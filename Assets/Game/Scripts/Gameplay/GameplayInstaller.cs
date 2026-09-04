@@ -9,6 +9,15 @@ namespace Game.Scripts.Gameplay
             BindPlayerCharacterMover();
             BindPlayerCharacterBouncer();
             BindMovingBehaviour();
+            BindScoreCounter();
+        }
+
+        private void BindScoreCounter()
+        {
+            Container
+                .BindInterfacesAndSelfTo<ScoreCounter>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindPlayerCharacterBouncer()

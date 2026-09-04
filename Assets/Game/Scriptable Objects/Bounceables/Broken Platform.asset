@@ -15,5 +15,7 @@ MonoBehaviour:
   <Type>k__BackingField: 2
   <Sprite>k__BackingField: {fileID: -615872605, guid: 59ef3926535cc8c4fb86f038fc806e3a, type: 3}
   <ActivatedSprite>k__BackingField: {fileID: -847709069, guid: 59ef3926535cc8c4fb86f038fc806e3a, type: 3}
+  <BounceMultiplier>k__BackingField: 0
   <Speed>k__BackingField: 0
+  <FallSpeed>k__BackingField: -5
   <IsOneTimeUse>k__BackingField: 0

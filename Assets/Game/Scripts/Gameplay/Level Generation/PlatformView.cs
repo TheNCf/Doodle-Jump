@@ -1,9 +1,8 @@
 using System;
-using Game.Scripts.Core;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Gameplay
+namespace Game.Scripts.Gameplay.LevelGeneration
 {
     [RequireComponent(typeof(BounceView))]
     [RequireComponent(typeof(Collider2D))]

@@ -15,6 +15,7 @@ namespace Game.Scripts.Gameplay
         
         public event Action<float> ReturnedBackByValue;
         public event Action<float> RelativeHeightChanged;
+        public event Action<float> TotalHeightChanged;
 
         public ObjectShifter(PlayerCharacterView playerCharacterView, ShiftRegistry shiftRegistry, CameraView cameraView)
         {
@@ -43,6 +44,7 @@ namespace Game.Scripts.Gameplay
             _cameraView.Transform.Translate(0, shift, 0);
             
             RelativeHeightChanged?.Invoke(RelativeHeight);
+            TotalHeightChanged?.Invoke(TotalHeight);
         }
 
         private void TryReturnToCenter()

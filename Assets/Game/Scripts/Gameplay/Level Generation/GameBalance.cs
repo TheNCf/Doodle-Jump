@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Scripts.Gameplay
+namespace Game.Scripts.Gameplay.LevelGeneration
 {
     [CreateAssetMenu(fileName = "Game Balance", menuName = "Doodle Jump/Game Balance")]
     public class GameBalance : ScriptableObject

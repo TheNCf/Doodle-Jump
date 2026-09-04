@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Game.Scripts.Gameplay
+namespace Game.Scripts.Gameplay.LevelGeneration
 {
     [CreateAssetMenu(fileName = "Platform Structure", menuName = "Doodle Jump/Platform Structure")]
     public class PlatformStructure : ScriptableObject
