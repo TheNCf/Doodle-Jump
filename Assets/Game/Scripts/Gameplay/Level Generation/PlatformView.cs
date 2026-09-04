@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Game.Scripts.Gameplay.LevelGeneration
 {
@@ -8,6 +9,9 @@ namespace Game.Scripts.Gameplay.LevelGeneration
     [RequireComponent(typeof(Collider2D))]
     public class PlatformView : MonoBehaviour, IShiftable, IDisposable, IPoolableObject, IMovable
     {
+        [SerializeField] private BounceView _springBounceView;
+        [SerializeField] private BounceConfig _springConfig;
+        
         private BounceView _bounceView;
         private Collider2D _collider2D;
         
@@ -47,6 +51,15 @@ namespace Game.Scripts.Gameplay.LevelGeneration
 
             _movingBehaviour.IsEnabled = config.Type == BounceType.Moving;
             _collider2D.isTrigger = config.Type == BounceType.Broken;
+
+            if (Random.value * 100 < config.SpringChance)
+            {
+                float localX = Random.Range(-_bounceView.SpriteRenderer.bounds.extents.x, _bounceView.SpriteRenderer.bounds.extents.x);
+                Vector3 localPosition = _springBounceView.transform.localPosition;
+                localPosition.x = localX;
+                _springBounceView.transform.localPosition = localPosition;
+                _springBounceView.Initialize(_springConfig);
+            }
         }
         
         public void ShiftDown(float distance)
@@ -63,6 +76,7 @@ namespace Game.Scripts.Gameplay.LevelGeneration
         public void ResetObject()
         {
             gameObject.SetActive(false);
+            _springBounceView.gameObject.SetActive(false);
         }
         
         private void OnTriggerEnter2D(Collider2D other)
