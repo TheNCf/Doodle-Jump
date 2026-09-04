@@ -7,7 +7,7 @@ namespace Game.Scripts.Core
             string output = "";
             
             foreach (char symbol in input)
-                output += $"<sprite name\"{symbol}\">";
+                output += $"<sprite name=\"{symbol}\">";
             
             return output;
         } 

@@ -8,7 +8,7 @@ namespace Game.Scripts.Gameplay
     {
         private ObjectShifter _shifter;
 
-        private float _scoreMultiplier = 20.0f;
+        private float _scoreMultiplier = 120.0f;
         
         public event Action<int> ScoreChanged;
 

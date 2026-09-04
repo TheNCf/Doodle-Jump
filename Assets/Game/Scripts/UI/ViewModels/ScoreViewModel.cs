@@ -3,7 +3,6 @@ using Game.Scripts.Core;
 using Game.Scripts.Gameplay;
 using MVVM;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 namespace Game.Scripts.UI.ViewModels

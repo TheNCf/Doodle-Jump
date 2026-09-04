@@ -6,6 +6,6 @@ namespace Game.Scripts.UI.Views
 {
     public class ScoreView : MonoBehaviour
     {
-        [Data("Score")] [SerializeField] private TMP_Text _scoreText;
+        [Data("Score")] [SerializeField] public TMP_Text _scoreText;
     }
 }
