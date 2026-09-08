@@ -21,10 +21,10 @@ namespace Game.Scripts.Gameplay
             GameplayInstaller.Install(Container);
 
             BindCameraView();
-            BindCharacterView();
+            BindPlayerCharacterView();
         }
 
-        private void BindCharacterView()
+        private void BindPlayerCharacterView()
         {
             Container
                 .Bind<PlayerCharacterView>()
