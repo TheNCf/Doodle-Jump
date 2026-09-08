@@ -1,10 +1,9 @@
 using System;
 using DG.Tweening;
-using Game.Scripts.UI.Views;
 using UniRx;
 using UnityEngine;
 
-namespace Game.Scripts.UI
+namespace Game.Scripts.Bootstrap
 {
     public class ImageDropEffector
     {

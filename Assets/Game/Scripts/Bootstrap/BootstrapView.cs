@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Game.Scripts.UI.Views;
 using UnityEngine;
 
-namespace Game.Scripts.UI
+namespace Game.Scripts.Bootstrap
 {
     public class BootstrapView : MonoBehaviour
     {

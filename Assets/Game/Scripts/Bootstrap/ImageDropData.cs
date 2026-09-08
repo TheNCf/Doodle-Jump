@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Scripts.UI
+namespace Game.Scripts.Bootstrap
 {
     [CreateAssetMenu(fileName = "Image Drop Data", menuName = "Doodle Jump/Image Drop Data")]
     public class ImageDropData : ScriptableObject

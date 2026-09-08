@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.UI.Views
+namespace Game.Scripts.Bootstrap
 {
     public class ImageDropView : MonoBehaviour
     {
