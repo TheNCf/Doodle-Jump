@@ -407,6 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rectTransform: {fileID: 318239559}
+  _image: {fileID: 0}
   _data: {fileID: 11400000, guid: 7c3c997f1838ec744986e5f9f360c610, type: 2}
 --- !u!1 &564126909
 GameObject:
@@ -440,6 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rectTransform: {fileID: 564126911}
+  _image: {fileID: 0}
   _data: {fileID: 11400000, guid: 789232a6bdb619c49b1a7c04b25219db, type: 2}
 --- !u!224 &564126911
 RectTransform:
@@ -509,6 +511,8 @@ GameObject:
   - component: {fileID: 1120659784}
   - component: {fileID: 1120659783}
   - component: {fileID: 1120659782}
+  - component: {fileID: 1120659785}
+  - component: {fileID: 1120659786}
   m_Layer: 0
   m_Name: '[Scene Context]'
   m_TagString: Untagged
@@ -529,7 +533,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 1789431364}
-  _settings: {fileID: 11400000, guid: 5dcb637288497f047ae04d707bf02d90, type: 2}
 --- !u!114 &1120659783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,7 +547,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
+  - {fileID: 1120659786}
   - {fileID: 1120659782}
+  - {fileID: 1120659785}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -578,6 +583,31 @@ Transform:
   - {fileID: 1789431363}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1120659785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120659781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e2e6a842714c30b5e40f555cf36904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneLoaderSettings: {fileID: 11400000, guid: 5dcb637288497f047ae04d707bf02d90, type: 2}
+--- !u!114 &1120659786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120659781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957b748388be441db8d4ab20cc9f07f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1289891851
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +687,7 @@ GameObject:
   - component: {fileID: 1789431363}
   - component: {fileID: 1789431364}
   m_Layer: 0
-  m_Name: BootstrapView
+  m_Name: SceneLoaderView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,9 +720,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c33c51307204882a6d43453c30ca53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _imageDropViews:
-  - {fileID: 318239562}
-  - {fileID: 564126910}
+  _animatables:
+  - _targetObject: {fileID: 318239562}
+  - _targetObject: {fileID: 564126910}
 --- !u!1 &2082536173
 GameObject:
   m_ObjectHideFlags: 0
