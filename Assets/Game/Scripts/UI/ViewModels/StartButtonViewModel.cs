@@ -1,4 +1,4 @@
-using Game.Scripts.Gameplay.Signals;
+using Game.Scripts.Core.SceneLoader;
 using MVVM;
 using Zenject;
 
@@ -6,17 +6,19 @@ namespace Game.Scripts.UI.ViewModels
 {
     public class StartButtonViewModel
     {
-        private SignalBus _signalBus;
+        private SceneLoader _sceneLoader;
+        private SceneLoaderSettings _sceneLoaderSettings;
         
-        public StartButtonViewModel(SignalBus signalBus)
+        public StartButtonViewModel(SceneLoader sceneLoader, SceneLoaderSettings sceneLoaderSettings)
         {
-            _signalBus = signalBus;
+            _sceneLoader = sceneLoader;
+            _sceneLoaderSettings = sceneLoaderSettings;
         }
 
         [Method("OnStartClick")]
         public void OnStartClicked()
         {
-            _signalBus.Fire(new OpenGameSceneSignal());
+            _sceneLoader.StartSceneLoading(_sceneLoaderSettings.SceneToLoad);
         }
     }
 }
