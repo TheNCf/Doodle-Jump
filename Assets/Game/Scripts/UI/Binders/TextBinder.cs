@@ -16,15 +16,12 @@ namespace Game.Scripts.UI.Binders
         {
             _view = view;
             _property = property;
-            Debug.Log("Binder created");
         }
         
         public void Bind()
         {
             OnNext(_property.Value);
             _handle = _property.Subscribe(this);
-            Debug.Log("Binded");
-            Debug.Log(_property.Value);
         }
 
         public void Unbind()
@@ -36,7 +33,6 @@ namespace Game.Scripts.UI.Binders
         public void OnNext(string value)
         {
             _view.text = value;
-            Debug.Log("Changed");
         }
 
         public void OnCompleted()

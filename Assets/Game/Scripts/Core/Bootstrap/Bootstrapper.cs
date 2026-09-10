@@ -16,7 +16,7 @@ namespace Game.Scripts.Core.Bootstrap
         
         public void Initialize()
         {
-            _sceneLoader.StartSceneLoading(_settings);
+            _sceneLoader.StartSceneLoading(_settings.SceneToLoad);
         }
     }
 }

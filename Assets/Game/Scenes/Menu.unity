@@ -207,6 +207,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 14978105}
+  - component: {fileID: 14978106}
+  - component: {fileID: 14978107}
   m_Layer: 0
   m_Name: '[UI]'
   m_TagString: Untagged
@@ -233,6 +235,30 @@ Transform:
   - {fileID: 1983310646}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &14978106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14978104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c29d2832d054ffbb0114b2a2b9f9490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &14978107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14978104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bc1bdd6c3349479827d9baf59a6f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &17833351
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,6 +346,8 @@ GameObject:
   - component: {fileID: 347761982}
   - component: {fileID: 347761981}
   - component: {fileID: 347761980}
+  - component: {fileID: 347761984}
+  - component: {fileID: 347761983}
   m_Layer: 5
   m_Name: Button Play
   m_TagString: Untagged
@@ -428,6 +456,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347761978}
   m_CullTransparentMesh: 1
+--- !u!114 &347761983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347761978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70a91892e9d6fe4b9586e3b4359f5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewBinding: 0
+  view: {fileID: 347761984}
+  viewType: {fileID: 0}
+  viewId: 
+  viewModelBinding: 1
+  viewModel: {fileID: 0}
+  viewModelType: {fileID: 11500000, guid: 00e9edf0724341f8bf2cdc0b462fbf5b, type: 3}
+  viewModelId: 
+--- !u!114 &347761984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347761978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcfbacf6ce344c218cb331b38d53fc46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 347761980}
 --- !u!1 &357017136
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f426febfa8487aa427e0b32c4aa6c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameSceneLoaderSettings: {fileID: 11400000, guid: 686ad142d57aad44ab45187d9b682d92, type: 2}
   _playerCharacterViewInstance: {fileID: 4142878128582741}
 --- !u!114 &496252392
 MonoBehaviour:
@@ -658,6 +720,8 @@ MonoBehaviour:
   - {fileID: 496252395}
   - {fileID: 496252394}
   - {fileID: 496252391}
+  - {fileID: 14978107}
+  - {fileID: 14978106}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -956,7 +1020,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717170956}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 

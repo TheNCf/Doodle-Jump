@@ -9,6 +9,7 @@ namespace Game.Scripts.UI.Binders
         public override void InstallBindings()
         {
             BinderFactory.RegisterBinder<TextBinder>();
+            BinderFactory.RegisterBinder<ButtonBinder>();
         }
     }
 }

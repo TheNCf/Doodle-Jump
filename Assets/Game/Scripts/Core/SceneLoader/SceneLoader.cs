@@ -19,9 +19,9 @@ namespace Game.Scripts.Core.SceneLoader
 
         }
 
-        public void StartSceneLoading(SceneLoaderSettings sceneLoaderSettings)
+        public void StartSceneLoading(string sceneName)
         {
-            _loadingOperation = SceneManager.LoadSceneAsync(sceneLoaderSettings.SceneToLoad, LoadSceneMode.Single);
+            _loadingOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
 
             if (_loadingOperation != null)
             {
