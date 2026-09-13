@@ -59,7 +59,6 @@ public class ObjectPool<T> where T : MonoBehaviour, IPoolableObject
                 if (item == obj)
                     throw new InvalidOperationException($"Trying to release already released object! {obj.name}");
 
-        Debug.Log($"{obj.name} released.");
         _pooledObjectList.Add(obj);
         _onReleaseAction?.Invoke(obj);
     }

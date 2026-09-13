@@ -2,7 +2,7 @@ using Game.Scripts.Core;
 using Game.Scripts.Gameplay.LevelGeneration;
 using Zenject;
 
-namespace Game.Scripts.Gameplay
+namespace Game.Scripts.Gameplay.Installers
 {
     public class InfrastructureInstaller : Installer<GameBalance, InfrastructureInstaller>
     {

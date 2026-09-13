@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bc1bdd6c3349479827d9baf59a6f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameSceneLoaderSettings: {fileID: 11400000, guid: 686ad142d57aad44ab45187d9b682d92, type: 2}
 --- !u!1 &17833351
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,7 +702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f426febfa8487aa427e0b32c4aa6c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameSceneLoaderSettings: {fileID: 11400000, guid: 686ad142d57aad44ab45187d9b682d92, type: 2}
   _playerCharacterViewInstance: {fileID: 4142878128582741}
 --- !u!114 &496252392
 MonoBehaviour:

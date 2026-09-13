@@ -1,11 +1,20 @@
+using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Gameplay
+namespace Game.Scripts.Gameplay.Installers
 {
-    public class GameplayInstaller : Installer<GameplayInstaller>
+    public class GameplayInstaller : Installer<PlayerCharacterView, GameplayInstaller>
     {
+        private readonly GameObject _playerCharacterViewPrefab;
+
+        public GameplayInstaller(GameObject playerCharacterViewPrefab)
+        {
+            _playerCharacterViewPrefab = playerCharacterViewPrefab;
+        }
+
         public override void InstallBindings()
         {
+            BindPlayerCharacterView();
             BindPlayerCharacterMover();
             BindPlayerCharacterBouncer();
             BindMovingBehaviour();
@@ -41,6 +50,15 @@ namespace Game.Scripts.Gameplay
             Container
                 .Bind<MovingBehaviour>()
                 .AsTransient();
+        }
+
+        private void BindPlayerCharacterView()
+        {
+            Container
+                .Bind<PlayerCharacterView>()
+                .FromComponentInNewPrefab(_playerCharacterViewPrefab)
+                .AsSingle()
+                .NonLazy();
         }
     }
 }

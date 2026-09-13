@@ -1,15 +1,15 @@
-using System;
 using Game.Scripts.Core;
 using Game.Scripts.Gameplay.LevelGeneration;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Gameplay
+namespace Game.Scripts.Gameplay.Installers
 {
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private CameraView _cameraView;
         [SerializeField] private PlayerCharacterView _playerCharacterViewPrefab;
+        [SerializeField] private LoseCheckerView _loseCheckerView;
         [SerializeField] private PlatformView _platformPrefab;
         [SerializeField] private int _initialPoolSize = 20;
         [SerializeField] private GameBalance _gameBalance;
@@ -18,17 +18,29 @@ namespace Game.Scripts.Gameplay
         {
             InfrastructureInstaller.Install(Container, _gameBalance);
             LevelGenerationInstaller.Install(Container, _platformPrefab, _initialPoolSize);
-            GameplayInstaller.Install(Container);
+            GameplayInstaller.Install(Container, _playerCharacterViewPrefab);
 
+            SignalBusInstaller.Install(Container);
+            Container.DeclareSignal<LoseSignal>();
+            
             BindCameraView();
-            BindPlayerCharacterView();
+            BindLoseCheckerView();
+            BindLoseChecker();
         }
 
-        private void BindPlayerCharacterView()
+        private void BindLoseCheckerView()
         {
             Container
-                .Bind<PlayerCharacterView>()
-                .FromComponentInNewPrefab(_playerCharacterViewPrefab)
+                .Bind<LoseCheckerView>()
+                .FromInstance(_loseCheckerView)
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindLoseChecker()
+        {
+            Container
+                .BindInterfacesAndSelfTo<LoseChecker>()
                 .AsSingle()
                 .NonLazy();
         }
