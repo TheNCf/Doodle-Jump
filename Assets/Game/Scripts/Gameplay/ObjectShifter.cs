@@ -5,30 +5,46 @@ using Zenject;
 
 namespace Game.Scripts.Gameplay
 {
-    public class ObjectShifter : ILateTickable
+    public class ObjectShifter : IInitializable, IDisposable, ILateTickable
     {
         private PlayerCharacterView _playerCharacterView;
         private ShiftRegistry _shiftRegistry;
         private CameraView _cameraView;
+        private SignalBus _signalBus;
 
         private float _heightThreshold = 10.0f;
+        private  bool _isGameEnded = false;
         
         public event Action<float> ReturnedBackByValue;
         public event Action<float> RelativeHeightChanged;
         public event Action<float> TotalHeightChanged;
 
-        public ObjectShifter(PlayerCharacterView playerCharacterView, ShiftRegistry shiftRegistry, CameraView cameraView)
+        public ObjectShifter(PlayerCharacterView playerCharacterView, ShiftRegistry shiftRegistry, CameraView cameraView, SignalBus signalBus)
         {
             _playerCharacterView = playerCharacterView;
             _shiftRegistry = shiftRegistry;
             _cameraView = cameraView;
+            _signalBus = signalBus;
         }
         
         public float RelativeHeight { get; private set; } = 0.0f;
         public float TotalHeight { get; private set; } = 0.0f;
+
+        public void Initialize()
+        {
+            _signalBus.Subscribe<LoseSignal>(OnLose);
+        }
+
+        public void Dispose()
+        {
+            _signalBus.Unsubscribe<LoseSignal>(OnLose);
+        }
         
         public void LateTick()
         {
+            if (_isGameEnded)
+                return;
+            
             TryToShift();
             TryReturnToCenter();
         }
@@ -67,6 +83,11 @@ namespace Game.Scripts.Gameplay
             
             RelativeHeight -= _heightThreshold;
             RelativeHeightChanged?.Invoke(RelativeHeight);
+        }
+
+        private void OnLose()
+        {
+            _isGameEnded = true;
         }
     }
 }

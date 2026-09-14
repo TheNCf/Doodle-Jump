@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Scripts.Core.Animation.Effectors
 {
-    public class ImageDropEffector : IAnimationStarter
+    public class RectTransformDropEffector : IAnimationStarter
     {
         private float _shrinkFraction = 0.3f; 
         private float _inflateFraction = 0.7f; 

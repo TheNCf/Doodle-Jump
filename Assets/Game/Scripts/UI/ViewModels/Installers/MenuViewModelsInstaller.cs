@@ -10,12 +10,12 @@ namespace Game.Scripts.UI.ViewModels
         
         public override void InstallBindings()
         {
-            BindStartButtonViewModel();
+            BindPlayButtonViewModel();
         }
 
-        private void BindStartButtonViewModel()
+        private void BindPlayButtonViewModel()
         {
-            Container.Bind<StartButtonViewModel>()
+            Container.Bind<PlayButtonViewModel>()
                 .AsSingle()
                 .WithArguments(_gameSceneLoaderSettings)
                 .NonLazy();

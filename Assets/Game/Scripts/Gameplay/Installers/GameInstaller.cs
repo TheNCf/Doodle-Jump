@@ -10,6 +10,7 @@ namespace Game.Scripts.Gameplay.Installers
         [SerializeField] private CameraView _cameraView;
         [SerializeField] private PlayerCharacterView _playerCharacterViewPrefab;
         [SerializeField] private LoseCheckerView _loseCheckerView;
+        [SerializeField] private LoseMenuView _loseMenuView;
         [SerializeField] private PlatformView _platformPrefab;
         [SerializeField] private int _initialPoolSize = 20;
         [SerializeField] private GameBalance _gameBalance;
@@ -26,6 +27,25 @@ namespace Game.Scripts.Gameplay.Installers
             BindCameraView();
             BindLoseCheckerView();
             BindLoseChecker();
+            
+            BindLoseMenuView();
+            BindLoseMenu();
+        }
+
+        private void BindLoseMenu()
+        {
+            Container
+                .BindInterfacesAndSelfTo<LoseMenu>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindLoseMenuView()
+        {
+            Container
+                .Bind<LoseMenuView>()
+                .FromInstance(_loseMenuView)
+                .AsSingle();
         }
 
         private void BindLoseCheckerView()

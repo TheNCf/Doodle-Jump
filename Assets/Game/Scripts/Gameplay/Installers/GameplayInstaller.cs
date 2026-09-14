@@ -5,9 +5,9 @@ namespace Game.Scripts.Gameplay.Installers
 {
     public class GameplayInstaller : Installer<PlayerCharacterView, GameplayInstaller>
     {
-        private readonly GameObject _playerCharacterViewPrefab;
+        private readonly PlayerCharacterView _playerCharacterViewPrefab;
 
-        public GameplayInstaller(GameObject playerCharacterViewPrefab)
+        public GameplayInstaller(PlayerCharacterView playerCharacterViewPrefab)
         {
             _playerCharacterViewPrefab = playerCharacterViewPrefab;
         }

@@ -1,21 +1,20 @@
 using Game.Scripts.Core.SceneLoader;
 using MVVM;
-using Zenject;
 
 namespace Game.Scripts.UI.ViewModels
 {
-    public class StartButtonViewModel
+    public class MenuButtonViewModel
     {
         private SceneLoader _sceneLoader;
         private SceneLoaderSettings _sceneLoaderSettings;
         
-        public StartButtonViewModel(SceneLoader sceneLoader, SceneLoaderSettings sceneLoaderSettings)
+        public MenuButtonViewModel(SceneLoader sceneLoader, SceneLoaderSettings sceneLoaderSettings)
         {
             _sceneLoader = sceneLoader;
             _sceneLoaderSettings = sceneLoaderSettings;
         }
 
-        [Method("OnStartClick")]
+        [Method("OnToMenuClick")]
         public void OnStartClicked()
         {
             _sceneLoader.StartSceneLoading(_sceneLoaderSettings.SceneToLoad);

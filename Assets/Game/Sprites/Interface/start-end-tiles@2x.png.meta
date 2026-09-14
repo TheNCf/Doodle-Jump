@@ -130,6 +130,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Play Again
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 331
+        width: 228
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1cef9b911753f74baf6b1b4f355e146
+      internalID: -1742183435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game Over Label
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 153
+        width: 432
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d9b6fa78f2de7c4197e99c6c83e6e33
+      internalID: 382131701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -141,6 +183,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Game Over Label: 382131701
+      Play Again: -1742183435
       Ripped Paper: -2142382982
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

@@ -47,7 +47,6 @@ namespace Game.Scripts.Gameplay
         private void EnableFall(Collider2D _)
         {
             _isFalling = true;
-            Debug.Log("Falling");
         }
 
         private void MoveHorizontally()

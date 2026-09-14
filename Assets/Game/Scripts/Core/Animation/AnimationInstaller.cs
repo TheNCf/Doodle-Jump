@@ -7,8 +7,17 @@ namespace Game.Scripts.Core.Animation
     {
         public override void InstallBindings()
         {
-            BindImageDropEffector();
+            BindRectTransformDropEffector();
             BindImageFadeEffector();
+            BindRectTransformHorizontalEffector();
+        }
+
+        private void BindRectTransformHorizontalEffector()
+        {
+            Container
+                .Bind<RectTransformHorizontalMoveEffector>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindImageFadeEffector()
@@ -19,10 +28,10 @@ namespace Game.Scripts.Core.Animation
                 .NonLazy();
         }
 
-        private void BindImageDropEffector()
+        private void BindRectTransformDropEffector()
         {
             Container
-                .BindInterfacesAndSelfTo<ImageDropEffector>()
+                .BindInterfacesAndSelfTo<RectTransformDropEffector>()
                 .AsSingle()
                 .NonLazy();
         }
