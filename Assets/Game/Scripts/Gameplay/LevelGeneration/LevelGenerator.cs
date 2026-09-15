@@ -8,6 +8,8 @@ namespace Game.Scripts.Gameplay
 {
     public class LevelGenerator : IInitializable
     {
+        const float HundredPercent = 100.0f;
+        
         private GameBalance _gameBalance;
         private CameraView _cameraView;
         private ObjectShifter _objectShifter;
@@ -51,29 +53,55 @@ namespace Game.Scripts.Gameplay
         {
             while (height > _spawnTrigger)
             {
-                float randomX = Random.Range(-_cameraView.Size.x, _cameraView.Size.x) / 2.0f;
-                Vector2 position = new Vector2(randomX, _spawnAdditionalHeight + _spawnTrigger);
-                BounceConfig config = GetRandomBounceConfig(_objectShifter.TotalHeight);
-                _platformSpawner.SpawnSingle(config, position, _spawnTrigger, _spawnAdditionalHeight);
-
+                _currentDifficulty = _gameBalance.GetTier(_objectShifter.TotalHeight);
+                
                 float jumpHeight = _playerCharacterView.GetJumpHeight();
                 float elevationPercent = Random.Range(_currentDifficulty.NextSpawnMinElevationPercent,
                     _currentDifficulty.NextSpawnMaxElevationPercent);
-
-                float elevation = (jumpHeight - _elevationLowering) * elevationPercent / 100.0f;
-
-                if (elevation <= 0f)
+                float elevation = (jumpHeight - _elevationLowering) * elevationPercent / HundredPercent;
+                float spawnHeight = _spawnAdditionalHeight + _spawnTrigger;
+                
+                bool isStructure = Random.Range(0, 100) <= _currentDifficulty.StructureChancePercent;
+                bool structureListNotEmpty = _currentDifficulty.AvailableStructures.Count > 0;
+                
+                if (isStructure && structureListNotEmpty)
                 {
-                    Debug.LogError(
-                        $"[{nameof(LevelGenerator)}] Elevation is {elevation}. Check your DifficultyTier settings for percentages! Breaking loop to prevent freeze.");
-                    break;
+                    int randomIndex = Random.Range(0, _currentDifficulty.AvailableStructures.Count);
+                    Vector2 position = new Vector2(0, spawnHeight);
+                    
+                    elevation += _platformSpawner.SpawnStructure(
+                        _currentDifficulty.AvailableStructures[randomIndex],
+                        position,
+                        _spawnTrigger,
+                        _spawnAdditionalHeight);
                 }
+                else
+                {
+                    float cameraHalfWidth = _cameraView.Size.x / 2.0f;
+                    float randomX = Random.Range(-cameraHalfWidth, cameraHalfWidth);
+                    Vector2 position = new Vector2(randomX, spawnHeight);
+                    BounceConfig config = GetRandomBounceConfig(_objectShifter.TotalHeight);
+                    
+                    _platformSpawner.SpawnSingle(
+                        config, 
+                        position, 
+                        _spawnTrigger, 
+                        _spawnAdditionalHeight);
 
+                    if (elevation <= 0f)
+                    {
+                        Debug.LogError(
+                            $"[{nameof(LevelGenerator)}] Elevation is {elevation}. Check your DifficultyTier settings for percentages! Breaking loop to prevent freeze.");
+                        break;
+                    }
+
+                    _elevationLowering = 0;
+
+                    if (config.Type == BounceType.Broken)
+                        _elevationLowering = elevation;
+                }
+                
                 _spawnTrigger += elevation;
-                _elevationLowering = 0;
-
-                if (config.Type == BounceType.Broken)
-                    _elevationLowering = elevation;
             }
         }
 
@@ -84,14 +112,12 @@ namespace Game.Scripts.Gameplay
 
         private BounceConfig GetRandomBounceConfig(float totalHeight)
         {
-            _currentDifficulty = _gameBalance.GetTier(totalHeight);
-
             float totalWeight = 0;
 
             foreach (var item in _currentDifficulty.PlatformChances)
                 totalWeight += item.Weight;
 
-            float randomValue = UnityEngine.Random.Range(0, totalWeight);
+            float randomValue = Random.Range(0, totalWeight);
             float currentWeightSum = 0;
 
             foreach (var item in _currentDifficulty.PlatformChances)

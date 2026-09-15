@@ -7,8 +7,10 @@ namespace Game.Scripts.Gameplay.LevelGeneration
 {
     [RequireComponent(typeof(BounceView))]
     [RequireComponent(typeof(Collider2D))]
-    public class PlatformView : MonoBehaviour, IShiftable, IDisposable, IPoolableObject, IMovable
+    public class PlatformView : MonoBehaviour, IShiftable, IDisposableObject, IPoolableObject, IMovable
     {
+        private const float HundredPercent = 100.0f;
+
         [SerializeField] private BounceView _springBounceView;
         [SerializeField] private BounceConfig _springConfig;
 
@@ -52,7 +54,7 @@ namespace Game.Scripts.Gameplay.LevelGeneration
             _movingBehaviour.IsEnabled = config.Type == BounceType.Moving;
             _collider2D.isTrigger = config.Type == BounceType.Broken;
 
-            if (Random.value * 100 < config.SpringChance)
+            if (Random.value * HundredPercent < config.SpringChance)
             {
                 float localX = Random.Range(-_bounceView.SpriteRenderer.bounds.extents.x,
                     _bounceView.SpriteRenderer.bounds.extents.x);

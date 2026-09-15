@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using Zenject;
 
 namespace Game.Scripts.Gameplay
 {
-    public class PlayerCharacterBouncer : IFixedTickable
+    public class PlayerCharacterBouncer : IFixedTickable, IDisposable
     {
         private readonly PlayerCharacterView _playerCharacterView;
 
@@ -23,6 +24,11 @@ namespace Game.Scripts.Gameplay
         public void FixedTick()
         {
             ToggleLegs();
+        }
+
+        public void Dispose()
+        {
+            _playerCharacterView.LegsColliding -= Bounce;
         }
 
         private void Bounce(Collision2D collision)

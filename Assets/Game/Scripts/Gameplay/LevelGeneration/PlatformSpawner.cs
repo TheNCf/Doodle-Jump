@@ -31,7 +31,7 @@ namespace Game.Scripts.Gameplay.LevelGeneration
             return view;
         }
 
-        public void SpawnStructure(PlatformStructure structure, Vector2 position, float spawnHeight,
+        public float SpawnStructure(PlatformStructure structure, Vector2 position, float spawnHeight,
             float distanceFromCenter)
         {
             foreach (PlatformSpawnData data in structure.Data)
@@ -40,14 +40,15 @@ namespace Game.Scripts.Gameplay.LevelGeneration
                     position + data.RelativePosition,
                     spawnHeight + data.RelativePosition.y,
                     distanceFromCenter + data.RelativePosition.y);
+
+            return structure.Data[structure.Data.Count - 1].RelativePosition.y;
         }
 
-        private void Release(IDisposable obj)
+        private void Release(IDisposableObject obj)
         {
-            if (obj is PlatformView == false)
+            if (obj is not PlatformView platform)
                 return;
-
-            PlatformView platform = (PlatformView)obj;
+            
             _disposer.RemoveFromTracking(platform);
             _shiftRegistry.Unregister(platform);
             _pool.Release(platform);

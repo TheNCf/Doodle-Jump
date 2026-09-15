@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Scripts.Core;
 
 namespace Game.Scripts.Gameplay.LevelGeneration
@@ -9,7 +10,8 @@ namespace Game.Scripts.Gameplay.LevelGeneration
         private ObjectShifter _objectShifter;
         private CameraView _cameraView;
 
-        private List<IDisposable> _trackedObjects = new List<IDisposable>();
+        private HashSet<IDisposableObject> _trackedObjects = new();
+        private readonly List<IDisposableObject> _disposalBuffer = new();
 
         public PlatformDisposer(ObjectShifter objectShifter, CameraView cameraView)
         {
@@ -19,14 +21,14 @@ namespace Game.Scripts.Gameplay.LevelGeneration
             _objectShifter.RelativeHeightChanged += CheckForDisposal;
         }
 
-        public event Action<IDisposable> MarkedForDisposal;
+        public event Action<IDisposableObject> MarkedForDisposal;
 
-        public void AddForTracking(IDisposable obj)
+        public void AddForTracking(IDisposableObject obj)
         {
             _trackedObjects.Add(obj);
         }
 
-        public void RemoveFromTracking(IDisposable obj)
+        public void RemoveFromTracking(IDisposableObject obj)
         {
             _trackedObjects.Remove(obj);
         }
@@ -36,13 +38,19 @@ namespace Game.Scripts.Gameplay.LevelGeneration
             if (_trackedObjects.Count == 0)
                 return;
 
-            for (int i = _trackedObjects.Count - 1; i >= 0; i--)
+            float disposalHeight = _objectShifter.RelativeHeight - _cameraView.Size.y / 2;
+            
+            foreach (IDisposableObject obj in _trackedObjects)
+                if (obj.SpawnHeight < disposalHeight - obj.DistanceFromCenter)
+                    _disposalBuffer.Add(obj);
+            
+            for (int i = _disposalBuffer.Count - 1; i >= 0; i--)
             {
-                IDisposable obj = _trackedObjects[i];
-
-                if (obj.SpawnHeight < _objectShifter.RelativeHeight - _cameraView.Size.y / 2 - obj.DistanceFromCenter)
-                    MarkedForDisposal?.Invoke(obj);
+                MarkedForDisposal?.Invoke(_disposalBuffer[i]);
+                _trackedObjects.Remove(_disposalBuffer[i]);
             }
+            
+            _disposalBuffer.Clear();
         }
     }
 }

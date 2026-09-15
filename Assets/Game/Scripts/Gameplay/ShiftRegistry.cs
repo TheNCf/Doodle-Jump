@@ -4,9 +4,9 @@ namespace Game.Scripts.Gameplay
 {
     public class ShiftRegistry
     {
-        private readonly List<IShiftable> _shiftables = new();
+        private readonly HashSet<IShiftable> _shiftables = new();
 
-        public IReadOnlyList<IShiftable> Shiftables => _shiftables;
+        public IReadOnlyCollection<IShiftable> Shiftables => _shiftables;
 
         public void Register(IShiftable shiftable) => _shiftables.Add(shiftable);
 
