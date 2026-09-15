@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: Black Screen Fade Data
   m_EditorClassIdentifier: 
   <Delay>k__BackingField: 0
-  <StartValue>k__BackingField: 0
-  <MinValue>k__BackingField: 0
-  <EndValue>k__BackingField: 1
   <Duration>k__BackingField: 0.5
+  <Ease>k__BackingField: 7

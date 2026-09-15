@@ -10,8 +10,6 @@ namespace Game.Scripts.Gameplay
         
         public override void InstallBindings()
         {
-            SignalBusInstaller.Install(Container);
-            
             BindPlayerCharacterView();
             BindPlayerCharacterBouncer();
         }

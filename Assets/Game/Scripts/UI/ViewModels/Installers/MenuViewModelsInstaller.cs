@@ -1,4 +1,5 @@
 using Game.Scripts.Core.SceneLoader;
+using Game.Scripts.UI.ViewModels.Signals;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +11,8 @@ namespace Game.Scripts.UI.ViewModels
         
         public override void InstallBindings()
         {
+            Container.DeclareSignal<PlayButtonPressedSignal>();
+            
             BindPlayButtonViewModel();
         }
 

@@ -5,21 +5,12 @@ using Zenject;
 
 namespace Game.Scripts.Core.Animation.Views
 {
-    public class ImageFadeView : MonoBehaviour, IAnimatable<ImageFadeEffector>
+    public class ImageFadeView : MonoBehaviour, IAnimatable
     {
-        [SerializeField] private RectTransform _rectTransform;
-        [SerializeField] private Image _image;
-        [SerializeField] private ObjectAnimationData _data;
+        [field: SerializeField] public Image Image { get; private set; }
+        [field: SerializeField] public ObjectAnimationData AnimationData { get; private set; }
+        [field: SerializeField] public float To { get; private set; }
 
-        public ObjectAnimationData AnimationData => _data;
-        public RectTransform RectTransform => _rectTransform;
-        public Image Image => _image;
-        public ImageFadeEffector AnimationStarter { get; private set; }
-        
-        [Inject]
-        public void Construct(ImageFadeEffector imageFadeEffector)
-        {
-            AnimationStarter = imageFadeEffector;
-        }
+        public IAnimation Animation => new ImageFadeAnimation(this);
     }
 }

@@ -8,11 +8,11 @@ namespace Game.Scripts.Core.Animation
     {
         [SerializeField] private UnityEngine.Object _targetObject;
 
-        public IAnimatable<IAnimationStarter> Interface => _targetObject as IAnimatable<IAnimationStarter>;
+        public IAnimatable Interface => _targetObject as IAnimatable;
 
         public void Validate()
         {
-            if (_targetObject != null && !(_targetObject is IAnimatable<IAnimationStarter>))
+            if (_targetObject != null && !(_targetObject is IAnimatable))
             {
                 Debug.LogError($"{_targetObject.name} didn't implement IAnimatable!");
                 _targetObject = null;

@@ -20,8 +20,7 @@ namespace Game.Scripts.Gameplay.Installers
             InfrastructureInstaller.Install(Container, _gameBalance);
             LevelGenerationInstaller.Install(Container, _platformPrefab, _initialPoolSize);
             GameplayInstaller.Install(Container, _playerCharacterViewPrefab);
-
-            SignalBusInstaller.Install(Container);
+            
             Container.DeclareSignal<LoseSignal>();
             
             BindCameraView();

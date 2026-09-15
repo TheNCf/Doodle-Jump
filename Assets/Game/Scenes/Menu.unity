@@ -767,7 +767,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626be824044a48448773f20f63ecd342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 1996308030}
 --- !u!114 &496252395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1186,7 +1185,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1996308031}
-  - component: {fileID: 1996308030}
   m_Layer: 0
   m_Name: Scene Loader View
   m_TagString: Untagged
@@ -1194,20 +1192,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1996308030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1996308029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c33c51307204882a6d43453c30ca53d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animatables:
-  - _targetObject: {fileID: 2042511359}
 --- !u!4 &1996308031
 Transform:
   m_ObjectHideFlags: 0
@@ -1254,9 +1238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22df72d74bcc40a487d973be5ef61afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rectTransform: {fileID: 2042511361}
-  _image: {fileID: 2042511360}
-  _data: {fileID: 11400000, guid: 139738bceef8b6c43804865f5be13879, type: 2}
+  <Image>k__BackingField: {fileID: 2042511360}
+  <AnimationData>k__BackingField: {fileID: 11400000, guid: 139738bceef8b6c43804865f5be13879, type: 2}
+  <To>k__BackingField: 1
 --- !u!114 &2042511360
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ namespace Game.Scripts.UI.ViewModels
         public void OnStartClicked()
         {
             _sceneLoader.StartSceneLoading(_sceneLoaderSettings.SceneToLoad);
+            _sceneLoader.AllowSceneActivation();
         }
     }
 }

@@ -7,21 +7,14 @@ using Zenject;
 namespace Game.Scripts.Core.Animation.Views
 {
     [Serializable]
-    public class RectTransformDropView : MonoBehaviour, IAnimatable<RectTransformDropEffector>
+    public class RectTransformDropView : MonoBehaviour, IAnimatable
     {
-        [SerializeField] private RectTransform _rectTransform;
-        [SerializeField] private Image _image;
-        [SerializeField] private ObjectAnimationData _data;
-    
-        public RectTransform RectTransform => _rectTransform;
-        public Image Image => _image;
-        public ObjectAnimationData AnimationData => _data;
-        public RectTransformDropEffector AnimationStarter { get; private set; } 
-        
-        [Inject]
-        public void Construct(RectTransformDropEffector rectTransformDropEffector)
-        {
-            AnimationStarter = rectTransformDropEffector;
-        }
+        [field: SerializeField] public RectTransform RectTransform { get; private set; }
+        [field: SerializeField] public ObjectAnimationData AnimationData { get; private set; }
+        [field: SerializeField] public float From { get; private set; }
+        [field: SerializeField] public float Min { get; private set; }
+        [field: SerializeField] public float To { get; private set; }
+        [field: SerializeField] public float ToMinDurationFraction { get; private set; }
+        public IAnimation Animation => new RectTransformDropAnimation(this);
     }
 }

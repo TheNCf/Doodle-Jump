@@ -406,9 +406,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c68efa4002e8545b5d34fedca21b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rectTransform: {fileID: 318239559}
-  _image: {fileID: 0}
-  _data: {fileID: 11400000, guid: 7c3c997f1838ec744986e5f9f360c610, type: 2}
+  <RectTransform>k__BackingField: {fileID: 318239559}
+  <AnimationData>k__BackingField: {fileID: 11400000, guid: 7c3c997f1838ec744986e5f9f360c610, type: 2}
+  <From>k__BackingField: 3
+  <Min>k__BackingField: 0.7
+  <To>k__BackingField: 1
+  <ToMinDurationFraction>k__BackingField: 0.7
 --- !u!1 &564126909
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,9 +443,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c68efa4002e8545b5d34fedca21b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rectTransform: {fileID: 564126911}
-  _image: {fileID: 0}
-  _data: {fileID: 11400000, guid: 789232a6bdb619c49b1a7c04b25219db, type: 2}
+  <RectTransform>k__BackingField: {fileID: 564126911}
+  <AnimationData>k__BackingField: {fileID: 11400000, guid: 789232a6bdb619c49b1a7c04b25219db, type: 2}
+  <From>k__BackingField: 3
+  <Min>k__BackingField: 0.7
+  <To>k__BackingField: 1
+  <ToMinDurationFraction>k__BackingField: 0.7
 --- !u!224 &564126911
 RectTransform:
   m_ObjectHideFlags: 0
@@ -532,7 +538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626be824044a48448773f20f63ecd342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 1789431364}
 --- !u!114 &1120659783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,6 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneLoaderSettings: {fileID: 11400000, guid: 5dcb637288497f047ae04d707bf02d90, type: 2}
+  _bootstrapView: {fileID: 1789431364}
 --- !u!114 &1120659786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,7 +723,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1789431362}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c33c51307204882a6d43453c30ca53d, type: 3}
+  m_Script: {fileID: 11500000, guid: c7f0e807fc5c4acc868a475ee7bda612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _animatables:

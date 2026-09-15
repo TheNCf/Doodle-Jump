@@ -5,11 +5,10 @@ namespace Game.Scripts.Core.SceneLoader
 {
     public class SceneLoaderInstaller : MonoInstaller
     {
-        [SerializeField] private SceneLoaderView _view;
-
         public override void InstallBindings()
         {
-            BindSceneLoaderView();
+            Container.DeclareSignal<SceneStartedLoading>().OptionalSubscriber();
+            
             BindSceneLoader();
         }
 
@@ -17,14 +16,6 @@ namespace Game.Scripts.Core.SceneLoader
         {
             Container
                 .BindInterfacesAndSelfTo<SceneLoader>()
-                .AsSingle()
-                .NonLazy();
-        }
-
-        private void BindSceneLoaderView()
-        {
-            Container.Bind<SceneLoaderView>()
-                .FromInstance(_view)
                 .AsSingle()
                 .NonLazy();
         }

@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: Game Name Drop Data
   m_EditorClassIdentifier: 
   <Delay>k__BackingField: 0.3
-  <StartValue>k__BackingField: 3
-  <MinValue>k__BackingField: 0.7
-  <EndValue>k__BackingField: 1
   <Duration>k__BackingField: 1
+  <Ease>k__BackingField: 7

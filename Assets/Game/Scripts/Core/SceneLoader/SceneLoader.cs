@@ -1,22 +1,18 @@
-using System;
-using Game.Scripts.Core.Animation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Game.Scripts.Core.SceneLoader
 {
     public class SceneLoader
     {
-        private SceneLoaderView _sceneLoaderView;
+        private SignalBus _signalBus;
         
         private AsyncOperation _loadingOperation;
         
-        public event Action AnimationsFinished;
-        
-        public SceneLoader(SceneLoaderView sceneLoaderView)
+        public SceneLoader(SignalBus signalBus)
         {
-            _sceneLoaderView = sceneLoaderView;
-
+            _signalBus = signalBus;
         }
 
         public void StartSceneLoading(string sceneName)
@@ -26,54 +22,14 @@ namespace Game.Scripts.Core.SceneLoader
             if (_loadingOperation != null)
             {
                 _loadingOperation.allowSceneActivation = false;
-                AnimationsFinished += () => _loadingOperation.allowSceneActivation = true;
+                _signalBus.Fire(new SceneStartedLoading(sceneName));
             }
-            
-            StartAnimation();
         }
-
-        private void StartAnimation()
+        
+        public void AllowSceneActivation()
         {
-            float maxSpentTime = -1.0f;
-            IAnimatable<IAnimationStarter> longestAnimation = null;
-
-            if (_sceneLoaderView.Animatables.Count == 0)
-            {
-                AnimationsFinished?.Invoke();
-                return;
-            }
-
-            foreach (AnimatableWrapper animatableWrapper in _sceneLoaderView.Animatables)
-            {
-                IAnimatable<IAnimationStarter> animatable = animatableWrapper.Interface;
-                
-                float spentTime = animatable.AnimationData.Delay + animatable.AnimationData.Duration;
-
-                if (spentTime > maxSpentTime)
-                {
-                    maxSpentTime = spentTime;
-                    longestAnimation = animatable;
-                }
-            }
-            
-            if (longestAnimation != null)
-            {
-                Action handler = null;
-                
-                handler = () =>
-                {
-                    longestAnimation.AnimationStarter.EffectFinished -= handler;
-                    AnimationsFinished?.Invoke();
-                };
-                
-                longestAnimation.AnimationStarter.EffectFinished += handler;
-            }
-
-            foreach (AnimatableWrapper animatableWrapper in _sceneLoaderView.Animatables)
-            {
-                IAnimatable<IAnimationStarter> animatable = animatableWrapper.Interface;
-                animatable.AnimationStarter.Activate(animatable);
-            }
+            if (_loadingOperation != null)
+                _loadingOperation.allowSceneActivation = true;
         }
     }
 }
