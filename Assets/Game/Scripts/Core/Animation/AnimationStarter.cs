@@ -12,15 +12,12 @@ namespace Game.Scripts.Core.Animation
         {
             if (animatables.Count == 0)
                 return;
-            
-            var animationStreams = 
+
+            var animationStreams =
                 animatables.Select(a => a.Interface.Animation.Play());
 
             Observable.WhenAll(animationStreams)
-                .Subscribe(_ =>
-                {
-                    onComplete?.Invoke();
-                })
+                .Subscribe(_ => { onComplete?.Invoke(); })
                 .AddTo(addTo);
         }
     }

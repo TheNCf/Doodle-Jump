@@ -8,11 +8,11 @@ namespace Game.Scripts.UI.ViewModels
     public class MenuViewModelsInstaller : MonoInstaller
     {
         [SerializeField] private SceneLoaderSettings _gameSceneLoaderSettings;
-        
+
         public override void InstallBindings()
         {
             Container.DeclareSignal<PlayButtonPressedSignal>();
-            
+
             BindPlayButtonViewModel();
         }
 

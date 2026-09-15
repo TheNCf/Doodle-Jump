@@ -24,12 +24,12 @@ namespace Game.Scripts.Core.Animation.Effectors
             _delay = view.AnimationData.Delay;
             _ease = view.AnimationData.Ease;
         }
-        
+
         public bool IsPlaying =>
             _tween != null &&
             _tween.IsActive() &&
             _tween.IsPlaying();
-        
+
         public IObservable<Unit> Play()
         {
             Stop();

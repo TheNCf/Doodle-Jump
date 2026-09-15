@@ -6,7 +6,7 @@ namespace Game.Scripts.Gameplay
     public class BounceView : MonoBehaviour, IBounceable
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        
+
         private BounceConfig _config;
         private BounceType _type;
         private float _bounceMultiplier = 1.0f;
@@ -15,7 +15,7 @@ namespace Game.Scripts.Gameplay
         public BounceConfig Config => _config;
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public float BounceMultiplier => _bounceMultiplier;
-        
+
         public void Initialize(BounceConfig config)
         {
             _config = config;

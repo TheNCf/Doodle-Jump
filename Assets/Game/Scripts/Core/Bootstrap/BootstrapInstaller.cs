@@ -4,11 +4,11 @@ using Zenject;
 
 namespace Game.Scripts.Core.Bootstrap
 {
-    public class BootstrapInstaller :MonoInstaller
+    public class BootstrapInstaller : MonoInstaller
     {
         [SerializeField] private SceneLoaderSettings _sceneLoaderSettings;
         [SerializeField] private BootstrapView _bootstrapView;
-        
+
         public override void InstallBindings()
         {
             BindBootstrapView();

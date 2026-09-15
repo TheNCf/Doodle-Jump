@@ -10,7 +10,7 @@ namespace Game.Scripts.Core
         public override void InstallBindings()
         {
             SignalBusInstaller.Install(Container);
-            
+
             Container.BindInterfacesAndSelfTo<AdService>()
                 .AsSingle()
                 .NonLazy();

@@ -10,7 +10,8 @@ namespace Game.Scripts.Gameplay
 
         private bool _isGameEnded = false;
 
-        public LoseChecker(PlayerCharacterView playerCharacterView, LoseCheckerView loseCheckerView, SignalBus signalBus)
+        public LoseChecker(PlayerCharacterView playerCharacterView, LoseCheckerView loseCheckerView,
+            SignalBus signalBus)
         {
             _playerCharacterView = playerCharacterView;
             _loseCheckerView = loseCheckerView;
@@ -21,7 +22,7 @@ namespace Game.Scripts.Gameplay
         {
             if (_isGameEnded)
                 return;
-            
+
             if (_playerCharacterView.Transform.position.y < _loseCheckerView.Transform.position.y)
             {
                 _signalBus.Fire(new LoseSignal());

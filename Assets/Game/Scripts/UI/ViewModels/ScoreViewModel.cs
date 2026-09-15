@@ -10,12 +10,12 @@ namespace Game.Scripts.UI.ViewModels
     public class ScoreViewModel : IInitializable, IDisposable
     {
         private ScoreCounter _scoreCounter;
-        
+
         public ScoreViewModel(ScoreCounter scoreCounter)
         {
             _scoreCounter = scoreCounter;
         }
-        
+
         [Data("Score")] public readonly ReactiveProperty<string> Score = new();
 
         public void Initialize()

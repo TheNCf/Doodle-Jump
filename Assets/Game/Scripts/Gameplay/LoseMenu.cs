@@ -34,7 +34,7 @@ namespace Game.Scripts.Gameplay
 
         private void OnLose()
         {
-            _animationStarter.Play(_view.Animatables, () => {}, _view);
+            _animationStarter.Play(_view.Animatables, () => { }, _view);
             _adService.ShowInterstitial();
         }
     }

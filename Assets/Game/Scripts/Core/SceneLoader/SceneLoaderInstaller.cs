@@ -8,7 +8,7 @@ namespace Game.Scripts.Core.SceneLoader
         public override void InstallBindings()
         {
             Container.DeclareSignal<SceneStartedLoading>().OptionalSubscriber();
-            
+
             BindSceneLoader();
         }
 

@@ -7,9 +7,9 @@ namespace Game.Scripts.Core.SceneLoader
     public class SceneLoader
     {
         private SignalBus _signalBus;
-        
+
         private AsyncOperation _loadingOperation;
-        
+
         public SceneLoader(SignalBus signalBus)
         {
             _signalBus = signalBus;
@@ -25,7 +25,7 @@ namespace Game.Scripts.Core.SceneLoader
                 _signalBus.Fire(new SceneStartedLoading(sceneName));
             }
         }
-        
+
         public void AllowSceneActivation()
         {
             if (_loadingOperation != null)

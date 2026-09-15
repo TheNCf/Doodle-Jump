@@ -12,7 +12,7 @@ namespace Game.Scripts.Gameplay.LevelGeneration
         [SerializeField] [Range(0, 100)] private float _nextSpawnMaxElevationPercent;
         [SerializeField] private List<PlatformChance> _platformChances;
         [SerializeField] private List<PlatformStructure> _availableStructures;
-        
+
         public float NextSpawnMinElevationPercent => _nextSpawnMinElevationPercent;
         public float NextSpawnMaxElevationPercent => _nextSpawnMaxElevationPercent;
         public IReadOnlyList<PlatformChance> PlatformChances => _platformChances;

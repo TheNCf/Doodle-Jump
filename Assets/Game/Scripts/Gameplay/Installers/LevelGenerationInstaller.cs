@@ -8,13 +8,13 @@ namespace Game.Scripts.Gameplay.Installers
     {
         private readonly PlatformView _platformPrefab;
         private readonly int _initialPoolSize;
-        
+
         public LevelGenerationInstaller(PlatformView platformPrefab, int initialPoolSize)
         {
             _platformPrefab = platformPrefab;
             _initialPoolSize = initialPoolSize;
         }
-        
+
         public override void InstallBindings()
         {
             BindPlatformObjectPool();
@@ -65,8 +65,8 @@ namespace Game.Scripts.Gameplay.Installers
         {
             Container.Bind<ObjectPool<PlatformView>>()
                 .FromMethod(ctx => ObjectPoolFactory.CreateMonoPool(
-                    Container, 
-                    _platformPrefab, 
+                    Container,
+                    _platformPrefab,
                     _initialPoolSize,
                     onGet: platform => platform.Activate(),
                     onRelease: platform => platform.ResetObject()

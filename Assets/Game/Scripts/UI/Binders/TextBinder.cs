@@ -17,7 +17,7 @@ namespace Game.Scripts.UI.Binders
             _view = view;
             _property = property;
         }
-        
+
         public void Bind()
         {
             OnNext(_property.Value);
@@ -37,12 +37,10 @@ namespace Game.Scripts.UI.Binders
 
         public void OnCompleted()
         {
-            
         }
 
         public void OnError(Exception error)
         {
-            
         }
     }
 }

@@ -8,33 +8,33 @@ namespace Game.Scripts.Gameplay
     {
         private IMovable _movable;
         private CameraView _cameraView;
-        
+
         private bool _isInitialized = false;
         private bool _isFalling = false;
 
         private float _platformHalfWidth;
         private float _cameraHalfWidth;
         private float _horizontalDirection = 1.0f;
-        
+
         public MovingBehaviour(CameraView cameraView)
         {
             _cameraView = cameraView;
-            
+
             _cameraHalfWidth = _cameraView.Size.x / 2.0f;
         }
-        
+
         public bool IsEnabled { get; set; }
 
         public void Initialize(IMovable movable, float width)
         {
             _movable = movable;
             _platformHalfWidth = width;
-            
+
             _isFalling = false;
 
             movable.EnteredTrigger -= EnableFall;
             movable.EnteredTrigger += EnableFall;
-            
+
             _isInitialized = true;
         }
 
@@ -53,7 +53,7 @@ namespace Game.Scripts.Gameplay
         {
             if (IsEnabled == false || _isInitialized == false || _movable is null || _isFalling == true)
                 return;
-            
+
             if (_movable.Transform.position.x * _horizontalDirection > _cameraHalfWidth - _platformHalfWidth)
                 _horizontalDirection *= -1;
 
@@ -64,7 +64,7 @@ namespace Game.Scripts.Gameplay
         {
             if (_isFalling == false || _isInitialized == false || _movable is null)
                 return;
-            
+
             _movable.Transform.Translate(0, _movable.FallSpeed * Time.deltaTime, 0);
         }
     }

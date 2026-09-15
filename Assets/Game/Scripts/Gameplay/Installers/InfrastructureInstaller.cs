@@ -7,18 +7,18 @@ namespace Game.Scripts.Gameplay.Installers
     public class InfrastructureInstaller : Installer<GameBalance, InfrastructureInstaller>
     {
         private readonly GameBalance _gameBalance;
-        
+
         public InfrastructureInstaller(GameBalance gameBalance)
         {
             _gameBalance = gameBalance;
         }
-        
+
         public override void InstallBindings()
         {
             BindInputService();
             BindGameBalance();
         }
-        
+
         private void BindGameBalance()
         {
             Container.BindInterfacesAndSelfTo<GameBalance>()

@@ -6,6 +6,7 @@ namespace Game.Scripts.UI.Views
 {
     public class PlayButtonView : MonoBehaviour
     {
-        [Data("OnToPlayClick")] [SerializeField] public Button button;
+        [Data("OnToPlayClick")] [SerializeField]
+        public Button button;
     }
 }

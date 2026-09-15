@@ -9,7 +9,7 @@ namespace Game.Scripts.Gameplay
         [SerializeField] private Transform _transform;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Collider2D _legCollider;
-    
+
         [SerializeField] private float _maxSpeed = 5.0f;
         [SerializeField] private float _speedInterpolation = 20.0f;
 
@@ -17,15 +17,15 @@ namespace Game.Scripts.Gameplay
         [SerializeField] private float _heightToShift = 1.0f;
 
         public event Action<Collision2D> LegsColliding;
-    
+
         public Rigidbody2D Rigidbody => _rigidbody;
         public Transform Transform => _transform;
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public Collider2D LegCollider => _legCollider;
-        
+
         public float MaxSpeed => _maxSpeed;
         public float SpeedInterpolation => _speedInterpolation;
-        
+
         public float JumpStrength => _jumpStrength;
         public float HeightToShift => _heightToShift;
 
@@ -37,7 +37,7 @@ namespace Game.Scripts.Gameplay
         public float GetJumpHeight()
         {
             float gravity = Mathf.Abs(Physics2D.gravity.y);
-            float effectiveGravity = gravity * _rigidbody.gravityScale; 
+            float effectiveGravity = gravity * _rigidbody.gravityScale;
             float height = (_jumpStrength * _jumpStrength) / (2.0f * effectiveGravity);
             return height;
         }

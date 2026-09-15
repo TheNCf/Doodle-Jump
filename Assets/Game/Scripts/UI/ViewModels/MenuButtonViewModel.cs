@@ -7,7 +7,7 @@ namespace Game.Scripts.UI.ViewModels
     {
         private SceneLoader _sceneLoader;
         private SceneLoaderSettings _sceneLoaderSettings;
-        
+
         public MenuButtonViewModel(SceneLoader sceneLoader, SceneLoaderSettings sceneLoaderSettings)
         {
             _sceneLoader = sceneLoader;

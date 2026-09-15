@@ -7,13 +7,13 @@ namespace Game.Scripts.Gameplay
     public class MenuInstaller : MonoInstaller
     {
         [SerializeField] private PlayerCharacterView _playerCharacterViewInstance;
-        
+
         public override void InstallBindings()
         {
             BindPlayerCharacterView();
             BindPlayerCharacterBouncer();
         }
-        
+
         private void BindPlayerCharacterBouncer()
         {
             Container
@@ -21,7 +21,7 @@ namespace Game.Scripts.Gameplay
                 .AsSingle()
                 .NonLazy();
         }
-        
+
         private void BindPlayerCharacterView()
         {
             Container

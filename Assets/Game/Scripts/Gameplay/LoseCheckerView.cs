@@ -6,7 +6,7 @@ namespace Game.Scripts.Gameplay
     public class LoseCheckerView : MonoBehaviour
     {
         private Vector3 _gizmosExtends = new Vector3(5.0f, 0, 0);
-        
+
         public Transform Transform => transform;
 
         private void OnDrawGizmosSelected()

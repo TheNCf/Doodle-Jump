@@ -23,7 +23,7 @@ namespace Game.Scripts.UI.ViewModels
                 .AsSingle()
                 .NonLazy();
         }
-        
+
         private void BindPlayButtonViewModel()
         {
             Container.Bind<PlayButtonViewModel>()
@@ -31,7 +31,7 @@ namespace Game.Scripts.UI.ViewModels
                 .WithArguments(_gameSceneLoaderSettings)
                 .NonLazy();
         }
-        
+
         private void BindMenuButtonViewModel()
         {
             Container.Bind<MenuButtonViewModel>()

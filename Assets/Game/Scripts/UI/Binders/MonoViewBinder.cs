@@ -17,39 +17,29 @@ namespace SampleGame
             FromResolveId = 2
         }
 
-        [SerializeField]
-        private BindingMode viewBinding;
+        [SerializeField] private BindingMode viewBinding;
 
         //[ShowIf(nameof(viewBinding), BindingMode.FromInstance)]
-        [SerializeField]
-        private Object view;
+        [SerializeField] private Object view;
 
         //[ShowIf("@this.viewBinding == BindingMode.FromResolve || this.viewBinding == BindingMode.FromResolveId")]
-        [SerializeField]
-        private MonoScript viewType;
+        [SerializeField] private MonoScript viewType;
 
         //[ShowIf(nameof(viewBinding), BindingMode.FromResolveId)]
-        [SerializeField]
-        private string viewId;
+        [SerializeField] private string viewId;
 
-        [Space(8)]
-        [SerializeField]
-        private BindingMode viewModelBinding;
+        [Space(8)] [SerializeField] private BindingMode viewModelBinding;
 
         //[ShowIf(nameof(viewModelBinding), BindingMode.FromInstance)]
-        [SerializeField]
-        private Object viewModel;
+        [SerializeField] private Object viewModel;
 
         //[ShowIf("@this.viewModelBinding == BindingMode.FromResolve || this.viewModelBinding == BindingMode.FromResolveId")]
-        [SerializeField]
-        private MonoScript viewModelType;
+        [SerializeField] private MonoScript viewModelType;
 
         //[ShowIf(nameof(viewModelBinding), BindingMode.FromResolveId)]
-        [SerializeField]
-        private string viewModelId;
+        [SerializeField] private string viewModelId;
 
-        [Inject]
-        private DiContainer diContainer;
+        [Inject] private DiContainer diContainer;
 
         private IBinder _binder;
 
@@ -82,10 +72,11 @@ namespace SampleGame
             {
                 BindingMode.FromInstance => this.viewModel,
                 BindingMode.FromResolve => this.diContainer.Resolve(this.viewModelType.GetClass()),
-                BindingMode.FromResolveId => this.diContainer.ResolveId(this.viewModelType.GetClass(), this.viewModelId),
+                BindingMode.FromResolveId =>
+                    this.diContainer.ResolveId(this.viewModelType.GetClass(), this.viewModelId),
                 _ => throw new Exception($"Binding type of view {this.viewBinding} is not found!")
             };
-            
+
             return BinderFactory.CreateComposite(view, model);
         }
     }

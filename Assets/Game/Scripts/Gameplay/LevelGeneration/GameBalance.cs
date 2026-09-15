@@ -11,9 +11,10 @@ namespace Game.Scripts.Gameplay.LevelGeneration
         public DifficultyTier GetTier(float height)
         {
             DifficultyTier currentTier = _tiers[0];
-            
+
             foreach (DifficultyTier tier in _tiers)
-                if (height >= tier.MinHeight) currentTier = tier;
+                if (height >= tier.MinHeight)
+                    currentTier = tier;
 
             return currentTier;
         }

@@ -8,9 +8,9 @@ namespace Game.Scripts.Gameplay.LevelGeneration
     {
         private ObjectShifter _objectShifter;
         private CameraView _cameraView;
-        
+
         private List<IDisposable> _trackedObjects = new List<IDisposable>();
-        
+
         public PlatformDisposer(ObjectShifter objectShifter, CameraView cameraView)
         {
             _objectShifter = objectShifter;
@@ -30,16 +30,16 @@ namespace Game.Scripts.Gameplay.LevelGeneration
         {
             _trackedObjects.Remove(obj);
         }
-        
+
         private void CheckForDisposal(float _)
         {
             if (_trackedObjects.Count == 0)
                 return;
-            
+
             for (int i = _trackedObjects.Count - 1; i >= 0; i--)
             {
                 IDisposable obj = _trackedObjects[i];
-                
+
                 if (obj.SpawnHeight < _objectShifter.RelativeHeight - _cameraView.Size.y / 2 - obj.DistanceFromCenter)
                     MarkedForDisposal?.Invoke(obj);
             }

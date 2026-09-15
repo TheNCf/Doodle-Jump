@@ -6,7 +6,8 @@ namespace Game.Scripts.Core
 {
     public class ObjectPoolFactory
     {
-        public static ObjectPool<T> CreateMonoPool<T>(DiContainer container, T prefab, int initialSize, Action<T> onGet = null, Action<T> onRelease = null) where T : MonoBehaviour, IPoolableObject
+        public static ObjectPool<T> CreateMonoPool<T>(DiContainer container, T prefab, int initialSize,
+            Action<T> onGet = null, Action<T> onRelease = null) where T : MonoBehaviour, IPoolableObject
         {
             T Create()
             {
@@ -29,7 +30,7 @@ namespace Game.Scripts.Core
 
             void OnClear(T item)
             {
-                if (item != null && item.gameObject != null) 
+                if (item != null && item.gameObject != null)
                     UnityEngine.Object.Destroy(item.gameObject);
             }
 

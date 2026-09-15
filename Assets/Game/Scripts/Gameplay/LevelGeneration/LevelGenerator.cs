@@ -17,7 +17,7 @@ namespace Game.Scripts.Gameplay
         private float _spawnTrigger = -15.0f;
         private float _spawnAdditionalHeight;
         private float _elevationLowering = 0.0f;
-        
+
         private DifficultyTier _currentDifficulty;
 
         public LevelGenerator(GameBalance gameBalance, CameraView cameraView, ObjectShifter objectShifter,
@@ -29,9 +29,9 @@ namespace Game.Scripts.Gameplay
             _platformSpawner = platformSpawner;
             _playerCharacterView = playerCharacterView;
         }
-        
+
         public float SpawnAdditionalHeight => _spawnAdditionalHeight;
-        
+
         public void Initialize()
         {
             _spawnAdditionalHeight = _cameraView.Size.y;
@@ -57,22 +57,23 @@ namespace Game.Scripts.Gameplay
                 _platformSpawner.SpawnSingle(config, position, _spawnTrigger, _spawnAdditionalHeight);
 
                 float jumpHeight = _playerCharacterView.GetJumpHeight();
-                float elevationPercent = Random.Range(_currentDifficulty.NextSpawnMinElevationPercent, 
+                float elevationPercent = Random.Range(_currentDifficulty.NextSpawnMinElevationPercent,
                     _currentDifficulty.NextSpawnMaxElevationPercent);
-                
+
                 float elevation = (jumpHeight - _elevationLowering) * elevationPercent / 100.0f;
-                
+
                 if (elevation <= 0f)
                 {
-                    Debug.LogError($"[{nameof(LevelGenerator)}] Elevation is {elevation}. Check your DifficultyTier settings for percentages! Breaking loop to prevent freeze.");
-                    break; 
+                    Debug.LogError(
+                        $"[{nameof(LevelGenerator)}] Elevation is {elevation}. Check your DifficultyTier settings for percentages! Breaking loop to prevent freeze.");
+                    break;
                 }
-                
+
                 _spawnTrigger += elevation;
                 _elevationLowering = 0;
 
                 if (config.Type == BounceType.Broken)
-                    _elevationLowering =  elevation;
+                    _elevationLowering = elevation;
             }
         }
 
@@ -100,7 +101,7 @@ namespace Game.Scripts.Gameplay
                 if (randomValue <= currentWeightSum)
                     return item.Config;
             }
-            
+
             return _currentDifficulty.PlatformChances[0].Config;
         }
     }
