@@ -24,6 +24,10 @@ namespace Game.Scripts.Core.SceneLoader
                 _loadingOperation.allowSceneActivation = false;
                 _signalBus.Fire(new SceneStartedLoading(sceneName));
             }
+            else
+            {
+                Debug.LogError("[SceneLoader] Could not load scene " + sceneName);
+            }
         }
 
         public void AllowSceneActivation()

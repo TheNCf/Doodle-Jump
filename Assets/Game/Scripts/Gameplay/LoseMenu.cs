@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Game.Scripts.Core.Ads;
 using Game.Scripts.Core.Animation;
-using UnityEngine;
 using Zenject;
 
 namespace Game.Scripts.Gameplay

@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Game.Scripts.Core.Animation;
-using Game.Scripts.Core.Animation.Effectors;
 using Game.Scripts.Core.SceneLoader;
-using UniRx;
 using Zenject;
 
 namespace Game.Scripts.Core.Bootstrap

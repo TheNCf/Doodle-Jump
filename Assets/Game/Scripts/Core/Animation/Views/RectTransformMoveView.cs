@@ -1,8 +1,5 @@
-using DG.Tweening;
 using Game.Scripts.Core.Animation.Effectors;
 using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
 
 namespace Game.Scripts.Core.Animation.Views
 {

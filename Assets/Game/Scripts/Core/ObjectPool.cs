@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Scripts.Core
 {
     public class ObjectPool<T> where T : MonoBehaviour, IPoolableObject
     {
-        private readonly List<T> _pooledObjectList;
+        private readonly HashSet<T> _pooledObjects;
 
         private int _pooledAtStart = 0;
         private int _countAll = 0;
@@ -16,7 +17,8 @@ namespace Game.Scripts.Core
         private Action<T> _onReleaseAction;
         private Action<T> _onClearAction;
 
-        public ObjectPool(Func<T> createFunction, Action<T> onGetAction, Action<T> onReleaseAction, Action<T> onClearAction,
+        public ObjectPool(Func<T> createFunction, Action<T> onGetAction, Action<T> onReleaseAction,
+            Action<T> onClearAction,
             int pooledAtStart)
         {
             _createFunction = createFunction;
@@ -25,28 +27,33 @@ namespace Game.Scripts.Core
             _onClearAction = onClearAction;
             _pooledAtStart = pooledAtStart;
 
-            _pooledObjectList = new List<T>();
+            _pooledObjects = new HashSet<T>();
             Initialize();
         }
 
         public int CountAll => _countAll;
-        public int CountInactive => _pooledObjectList.Count;
+        public int CountInactive => _pooledObjects.Count;
         public int CountActive => CountAll - CountInactive;
 
         public T Get()
         {
-            T result;
+            T result = null;
 
-            if (CountInactive == 0)
+            if (CountInactive > 0)
+            {
+                using var enumerator = _pooledObjects.GetEnumerator();
+                
+                if (enumerator.MoveNext())
+                {
+                    result = enumerator.Current;
+                    _pooledObjects.Remove(result);
+                }
+            }
+
+            if (result is null) 
             {
                 result = _createFunction();
                 _countAll++;
-            }
-            else
-            {
-                int index = CountInactive - 1;
-                result = _pooledObjectList[index];
-                _pooledObjectList.RemoveAt(index);
             }
 
             _onGetAction?.Invoke(result);
@@ -55,23 +62,18 @@ namespace Game.Scripts.Core
 
         public void Release(T obj)
         {
-            if (CountInactive > 0)
-                foreach (var item in _pooledObjectList)
-                    if (item == obj)
-                        throw new InvalidOperationException($"Trying to release already released object! {obj.name}");
-
-            _pooledObjectList.Add(obj);
+            _pooledObjects.Add(obj);
             _onReleaseAction?.Invoke(obj);
         }
 
         public void Clear()
         {
             if (_onClearAction != null)
-                foreach (var obj in _pooledObjectList)
+                foreach (var obj in _pooledObjects)
                     _onClearAction?.Invoke(obj);
 
             _countAll = 0;
-            _pooledObjectList.Clear();
+            _pooledObjects.Clear();
         }
 
         private void Initialize()
@@ -83,7 +85,7 @@ namespace Game.Scripts.Core
                 buffer = _createFunction();
                 _countAll++;
                 buffer.gameObject.name += $" ({_countAll})";
-                _pooledObjectList.Add(buffer);
+                _pooledObjects.Add(buffer);
             }
         }
     }

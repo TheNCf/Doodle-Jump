@@ -1,3 +1,4 @@
+using System;
 using Game.Scripts.Core;
 using Game.Scripts.Gameplay.LevelGeneration;
 using UnityEngine;
@@ -6,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace Game.Scripts.Gameplay
 {
-    public class LevelGenerator : IInitializable
+    public class LevelGenerator : IInitializable, IDisposable
     {
         const float HundredPercent = 100.0f;
         
@@ -31,8 +32,6 @@ namespace Game.Scripts.Gameplay
             _platformSpawner = platformSpawner;
             _playerCharacterView = playerCharacterView;
         }
-
-        public float SpawnAdditionalHeight => _spawnAdditionalHeight;
 
         public void Initialize()
         {

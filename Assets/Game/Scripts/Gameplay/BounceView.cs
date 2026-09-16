@@ -8,9 +8,7 @@ namespace Game.Scripts.Gameplay
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
         private BounceConfig _config;
-        private BounceType _type;
         private float _bounceMultiplier = 1.0f;
-        private float _horizontalSpeed = 1.0f;
 
         public BounceConfig Config => _config;
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
@@ -26,8 +24,6 @@ namespace Game.Scripts.Gameplay
         private void ApplyConfig()
         {
             _bounceMultiplier = _config.BounceMultiplier;
-            _horizontalSpeed = _config.Speed;
-            _type = _config.Type;
             _spriteRenderer.sprite = _config.Sprite;
         }
     }
