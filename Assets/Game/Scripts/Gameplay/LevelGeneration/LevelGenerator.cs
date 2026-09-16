@@ -54,9 +54,13 @@ namespace Game.Scripts.Gameplay
             {
                 _currentDifficulty = _gameBalance.GetTier(_objectShifter.TotalHeight);
                 
-                float jumpHeight = _playerCharacterView.GetJumpHeight();
+                float jumpHeight = PhysicsUtils.GetJumpHeight(
+                    _playerCharacterView.Rigidbody.gravityScale,
+                    _playerCharacterView.JumpStrength);
+                
                 float elevationPercent = Random.Range(_currentDifficulty.NextSpawnMinElevationPercent,
                     _currentDifficulty.NextSpawnMaxElevationPercent);
+                
                 float elevation = (jumpHeight - _elevationLowering) * elevationPercent / HundredPercent;
                 float spawnHeight = _spawnAdditionalHeight + _spawnTrigger;
                 
@@ -79,7 +83,7 @@ namespace Game.Scripts.Gameplay
                     float cameraHalfWidth = _cameraView.Size.x / 2.0f;
                     float randomX = Random.Range(-cameraHalfWidth, cameraHalfWidth);
                     Vector2 position = new Vector2(randomX, spawnHeight);
-                    BounceConfig config = GetRandomBounceConfig(_objectShifter.TotalHeight);
+                    BounceConfig config = GetRandomBounceConfig();
                     
                     _platformSpawner.SpawnSingle(
                         config, 
@@ -109,7 +113,7 @@ namespace Game.Scripts.Gameplay
             _spawnTrigger -= shiftValue;
         }
 
-        private BounceConfig GetRandomBounceConfig(float totalHeight)
+        private BounceConfig GetRandomBounceConfig()
         {
             float totalWeight = 0;
 
