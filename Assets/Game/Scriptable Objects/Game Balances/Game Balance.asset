@@ -21,8 +21,9 @@ MonoBehaviour:
       <Weight>k__BackingField: 95
     - <Config>k__BackingField: {fileID: 11400000, guid: d259d3c3453204343b253d8132327d07, type: 2}
       <Weight>k__BackingField: 5
+    _structureChancePercent: 0
     _availableStructures: []
-  - <MinHeight>k__BackingField: 15
+  - <MinHeight>k__BackingField: 5
     _nextSpawnMinElevationPercent: 30
     _nextSpawnMaxElevationPercent: 55
     _platformChances:
@@ -32,4 +33,6 @@ MonoBehaviour:
       <Weight>k__BackingField: 10
     - <Config>k__BackingField: {fileID: 11400000, guid: d259d3c3453204343b253d8132327d07, type: 2}
       <Weight>k__BackingField: 5
-    _availableStructures: []
+    _structureChancePercent: 1
+    _availableStructures:
+    - {fileID: 11400000, guid: f58f9bc98fdeff74b93f62836f289c7c, type: 2}

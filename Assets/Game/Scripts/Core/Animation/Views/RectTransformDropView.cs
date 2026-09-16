@@ -15,6 +15,17 @@ namespace Game.Scripts.Core.Animation.Views
         [field: SerializeField] public float Min { get; private set; }
         [field: SerializeField] public float To { get; private set; }
         [field: SerializeField] public float ToMinDurationFraction { get; private set; }
-        public IAnimation Animation => new RectTransformDropAnimation(this);
+        public IAnimation Animation
+        {
+            get
+            {
+                if (_animation == null)
+                    _animation = new RectTransformDropAnimation(this);
+                
+                return _animation;
+            }
+        }
+
+        private IAnimation _animation;
     }
 }

@@ -21,6 +21,7 @@ namespace Game.Scripts.Gameplay
         private float _spawnAdditionalHeight;
         private float _elevationLowering = 0.0f;
 
+        private PlatformConfigSelector _configSelector = new();
         private DifficultyTier _currentDifficulty;
 
         public LevelGenerator(GameBalance gameBalance, CameraView cameraView, ObjectShifter objectShifter,
@@ -83,7 +84,7 @@ namespace Game.Scripts.Gameplay
                     float cameraHalfWidth = _cameraView.Size.x / 2.0f;
                     float randomX = Random.Range(-cameraHalfWidth, cameraHalfWidth);
                     Vector2 position = new Vector2(randomX, spawnHeight);
-                    BounceConfig config = GetRandomBounceConfig();
+                    BounceConfig config = _configSelector.GetRandomBounceConfig(_currentDifficulty);
                     
                     _platformSpawner.SpawnSingle(
                         config, 
@@ -111,27 +112,6 @@ namespace Game.Scripts.Gameplay
         private void OnReturn(float shiftValue)
         {
             _spawnTrigger -= shiftValue;
-        }
-
-        private BounceConfig GetRandomBounceConfig()
-        {
-            float totalWeight = 0;
-
-            foreach (var item in _currentDifficulty.PlatformChances)
-                totalWeight += item.Weight;
-
-            float randomValue = Random.Range(0, totalWeight);
-            float currentWeightSum = 0;
-
-            foreach (var item in _currentDifficulty.PlatformChances)
-            {
-                currentWeightSum += item.Weight;
-
-                if (randomValue <= currentWeightSum)
-                    return item.Config;
-            }
-
-            return _currentDifficulty.PlatformChances[0].Config;
         }
     }
 }

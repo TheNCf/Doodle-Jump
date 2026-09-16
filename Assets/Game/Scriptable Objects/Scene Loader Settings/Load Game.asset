@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a3c7fce532477fb759acefd1de17a5, type: 3}
   m_Name: Load Game
   m_EditorClassIdentifier: 
-  <SceneToLoad>k__BackingField: Game
+  <SceneToLoad>k__BackingField: 2

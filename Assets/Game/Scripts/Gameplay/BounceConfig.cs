@@ -11,7 +11,6 @@ namespace Game.Scripts.Gameplay
         [field: SerializeField] public float BounceMultiplier { get; private set; }
         [field: SerializeField] public float Speed { get; private set; }
         [field: SerializeField] public float FallSpeed { get; private set; }
-        [field: SerializeField] public bool IsOneTimeUse { get; private set; }
         [field: SerializeField] public float SpringChance { get; private set; }
     }
 }

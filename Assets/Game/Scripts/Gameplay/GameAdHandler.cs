@@ -1,21 +1,18 @@
 using System;
 using Game.Scripts.Core.Ads;
-using Game.Scripts.Core.Animation;
 using Zenject;
 
 namespace Game.Scripts.Gameplay
 {
-    public class LoseMenu : IInitializable, IDisposable
+    public class GameAdHandler : IInitializable, IDisposable
     {
-        private LoseMenuView _view;
         private SignalBus _signalBus;
-        private AnimationStarter _animationStarter;
+        private AdService _adService;
 
-        public LoseMenu(LoseMenuView view, SignalBus signalBus, AnimationStarter animationStarter)
+        public GameAdHandler(SignalBus signalBus, AdService adService)
         {
-            _view = view;
             _signalBus = signalBus;
-            _animationStarter = animationStarter;
+            _adService = adService;
         }
 
         public void Initialize()
@@ -30,7 +27,7 @@ namespace Game.Scripts.Gameplay
 
         private void OnLose()
         {
-            _animationStarter.Play(_view.Animatables, () => { }, _view);
+            _adService.ShowInterstitial();
         }
     }
 }

@@ -29,6 +29,15 @@ namespace Game.Scripts.Gameplay.Installers
 
             BindLoseMenuView();
             BindLoseMenu();
+            BindGameAdHandler();
+        }
+
+        private void BindGameAdHandler()
+        {
+            Container
+                .BindInterfacesAndSelfTo<GameAdHandler>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindLoseMenu()

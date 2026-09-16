@@ -8,6 +8,17 @@ namespace Game.Scripts.Core.Animation.Views
         [field: SerializeField] public ObjectAnimationData AnimationData { get; private set; }
         [field: SerializeField] public Vector3 Delta { get; private set; }
         public Transform Transform => transform;
-        public IAnimation Animation => new TransformMoveAnimation(this);
+        public IAnimation Animation
+        {
+            get
+            {
+                if (_animation == null)
+                    _animation = new TransformMoveAnimation(this);
+                
+                return _animation;
+            }
+        }
+
+        private IAnimation _animation;
     }
 }

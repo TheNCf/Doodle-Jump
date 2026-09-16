@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3e35856ff5438395cc46012ef0c5a2, type: 3}
   m_Name: Moving Platforms
   m_EditorClassIdentifier: 
-  _data: []
+  _data:
+  - <Config>k__BackingField: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+    <RelativePosition>k__BackingField: {x: -0.4, y: 0}
+  - <Config>k__BackingField: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+    <RelativePosition>k__BackingField: {x: -0.2, y: 2}
+  - <Config>k__BackingField: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+    <RelativePosition>k__BackingField: {x: 0, y: 4}
+  - <Config>k__BackingField: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+    <RelativePosition>k__BackingField: {x: 0.2, y: 6}
+  - <Config>k__BackingField: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+    <RelativePosition>k__BackingField: {x: 0.4, y: 8}
+  - <Config>k__BackingField: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+    <RelativePosition>k__BackingField: {x: 0.6, y: 10}
+  - <Config>k__BackingField: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+    <RelativePosition>k__BackingField: {x: 0.8, y: 12}
+  - <Config>k__BackingField: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+    <RelativePosition>k__BackingField: {x: 1, y: 14}
+  - <Config>k__BackingField: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+    <RelativePosition>k__BackingField: {x: 1.2, y: 16}
+  - <Config>k__BackingField: {fileID: 11400000, guid: b092b44c352cc1543bfa00c97012d36e, type: 2}
+    <RelativePosition>k__BackingField: {x: 1.4, y: 18}

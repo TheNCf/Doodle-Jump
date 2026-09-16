@@ -9,12 +9,9 @@ namespace Game.Scripts.Gameplay.LevelGeneration
     [RequireComponent(typeof(Collider2D))]
     public class PlatformView : MonoBehaviour, IShiftable, IDisposableObject, IPoolableObject, IMovable
     {
-        private const float HundredPercent = 100.0f;
-
         [SerializeField] private BounceView _springBounceView;
         [SerializeField] private BounceConfig _springConfig;
 
-        private BounceView _bounceView;
         private Collider2D _collider2D;
 
         private MovingBehaviour _movingBehaviour;
@@ -22,6 +19,9 @@ namespace Game.Scripts.Gameplay.LevelGeneration
 
         public event Action<Collider2D> EnteredTrigger;
 
+        public BounceView BounceView { get; private set; }
+        public BounceView SpringBounceView => _springBounceView;
+        public BounceConfig SpringConfig => _springConfig;
         public float SpawnHeight { get; private set; }
         public float DistanceFromCenter { get; private set; }
         public Transform Transform => transform;
@@ -31,7 +31,7 @@ namespace Game.Scripts.Gameplay.LevelGeneration
         [Inject]
         public void Construct(MovingBehaviour movingBehaviour, TickableManager tickableManager)
         {
-            _bounceView = GetComponent<BounceView>();
+            BounceView = GetComponent<BounceView>();
             _collider2D = GetComponent<Collider2D>();
 
             _movingBehaviour = movingBehaviour;
@@ -47,22 +47,12 @@ namespace Game.Scripts.Gameplay.LevelGeneration
             HorizontalSpeed = config.Speed;
             FallSpeed = config.FallSpeed;
 
-            _bounceView.Initialize(config);
+            BounceView.Initialize(config);
             float width = _collider2D.bounds.extents.x;
             _movingBehaviour.Initialize(this, width);
 
             _movingBehaviour.IsEnabled = config.Type == BounceType.Moving;
             _collider2D.isTrigger = config.Type == BounceType.Broken;
-
-            if (Random.value * HundredPercent < config.SpringChance)
-            {
-                float localX = Random.Range(-_bounceView.SpriteRenderer.bounds.extents.x,
-                    _bounceView.SpriteRenderer.bounds.extents.x);
-                Vector3 localPosition = _springBounceView.transform.localPosition;
-                localPosition.x = localX;
-                _springBounceView.transform.localPosition = localPosition;
-                _springBounceView.Initialize(_springConfig);
-            }
         }
 
         public void ShiftDown(float distance)
@@ -85,7 +75,7 @@ namespace Game.Scripts.Gameplay.LevelGeneration
         private void OnTriggerEnter2D(Collider2D other)
         {
             EnteredTrigger?.Invoke(other);
-            _bounceView.SpriteRenderer.sprite = _bounceView.Config.ActivatedSprite;
+            BounceView.SpriteRenderer.sprite = BounceView.Config.ActivatedSprite;
         }
     }
 }

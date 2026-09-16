@@ -1,33 +1,35 @@
+using System;
 using Zenject;
 
 namespace Game.Scripts.Gameplay
 {
-    public class LoseChecker : ITickable
+    public class LoseChecker : IDisposable
     {
-        private PlayerCharacterView _playerCharacterView;
         private LoseCheckerView _loseCheckerView;
         private SignalBus _signalBus;
 
         private bool _isGameEnded = false;
 
-        public LoseChecker(PlayerCharacterView playerCharacterView, LoseCheckerView loseCheckerView,
-            SignalBus signalBus)
+        public LoseChecker(LoseCheckerView loseCheckerView, SignalBus signalBus)
         {
-            _playerCharacterView = playerCharacterView;
             _loseCheckerView = loseCheckerView;
             _signalBus = signalBus;
+            
+            _loseCheckerView.Lose += OnLose;
         }
 
-        public void Tick()
+        public void Dispose()
         {
+            _loseCheckerView.Lose = OnLose;
+        }
+
+        private void OnLose()
+        { 
             if (_isGameEnded)
                 return;
-
-            if (_playerCharacterView.Transform.position.y < _loseCheckerView.Transform.position.y)
-            {
-                _signalBus.Fire(new LoseSignal());
-                _isGameEnded = true;
-            }
+            
+            _signalBus.Fire(new LoseSignal());
+            _isGameEnded = true;
         }
     }
 }
