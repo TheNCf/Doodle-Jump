@@ -2,9 +2,9 @@ namespace Game.Scripts.Core.SceneLoader
 {
     public class SceneStartedLoading
     {
-        public string SceneName { get; }
+        public SceneName SceneName { get; }
 
-        public SceneStartedLoading(string sceneName)
+        public SceneStartedLoading(SceneName sceneName)
         {
             SceneName = sceneName;
         }

@@ -15,9 +15,9 @@ namespace Game.Scripts.Core.SceneLoader
             _signalBus = signalBus;
         }
 
-        public void StartSceneLoading(string sceneName)
+        public void StartSceneLoading(SceneName sceneName)
         {
-            _loadingOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+            _loadingOperation = SceneManager.LoadSceneAsync((int)sceneName, LoadSceneMode.Single);
 
             if (_loadingOperation != null)
             {
