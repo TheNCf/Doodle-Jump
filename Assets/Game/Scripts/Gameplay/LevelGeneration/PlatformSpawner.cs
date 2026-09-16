@@ -39,7 +39,7 @@ namespace Game.Scripts.Gameplay.LevelGeneration
                     data.Config,
                     position + data.RelativePosition,
                     spawnHeight + data.RelativePosition.y,
-                    distanceFromCenter + data.RelativePosition.y);
+                    distanceFromCenter);
 
             return structure.Data[structure.Data.Count - 1].RelativePosition.y;
         }
