@@ -5,7 +5,7 @@ using UnityEngine;
 using Zenject;
 using Object = UnityEngine.Object;
 
-namespace SampleGame
+namespace Game.Scripts.UI.Binders
 {
     public sealed class MonoViewBinder : MonoBehaviour
     {
