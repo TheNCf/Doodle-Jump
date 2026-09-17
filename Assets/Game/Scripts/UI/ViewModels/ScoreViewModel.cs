@@ -9,24 +9,23 @@ namespace Game.Scripts.UI.ViewModels
 {
     public class ScoreViewModel : IInitializable, IDisposable
     {
-        private ScoreCounter _scoreCounter;
+        [Data("Score")] public readonly ReactiveProperty<string> Score = new();
+        private readonly ScoreCounter _scoreCounter;
 
         public ScoreViewModel(ScoreCounter scoreCounter)
         {
             _scoreCounter = scoreCounter;
         }
 
-        [Data("Score")] public readonly ReactiveProperty<string> Score = new();
+        public void Dispose()
+        {
+            _scoreCounter.ScoreChanged -= OnScoreChanged;
+        }
 
         public void Initialize()
         {
             OnScoreChanged(_scoreCounter.Score);
             _scoreCounter.ScoreChanged += OnScoreChanged;
-        }
-
-        public void Dispose()
-        {
-            _scoreCounter.ScoreChanged -= OnScoreChanged;
         }
 
         private void OnScoreChanged(int score)

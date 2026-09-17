@@ -1,21 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Game.Scripts.Core
 {
     public class ObjectPool<T> where T : MonoBehaviour, IPoolableObject
     {
+        private readonly Func<T> _createFunction;
+        private readonly Action<T> _onClearAction;
+        private readonly Action<T> _onGetAction;
+        private readonly Action<T> _onReleaseAction;
+
+        private readonly int _pooledAtStart;
         private readonly HashSet<T> _pooledObjects;
-
-        private int _pooledAtStart = 0;
-        private int _countAll = 0;
-
-        private Func<T> _createFunction;
-        private Action<T> _onGetAction;
-        private Action<T> _onReleaseAction;
-        private Action<T> _onClearAction;
 
         public ObjectPool(Func<T> createFunction, Action<T> onGetAction, Action<T> onReleaseAction,
             Action<T> onClearAction,
@@ -31,7 +28,8 @@ namespace Game.Scripts.Core
             Initialize();
         }
 
-        public int CountAll => _countAll;
+        public int CountAll { get; private set; }
+
         public int CountInactive => _pooledObjects.Count;
         public int CountActive => CountAll - CountInactive;
 
@@ -42,7 +40,7 @@ namespace Game.Scripts.Core
             if (CountInactive > 0)
             {
                 using var enumerator = _pooledObjects.GetEnumerator();
-                
+
                 if (enumerator.MoveNext())
                 {
                     result = enumerator.Current;
@@ -50,10 +48,10 @@ namespace Game.Scripts.Core
                 }
             }
 
-            if (result is null) 
+            if (result is null)
             {
                 result = _createFunction();
-                _countAll++;
+                CountAll++;
             }
 
             _onGetAction?.Invoke(result);
@@ -72,7 +70,7 @@ namespace Game.Scripts.Core
                 foreach (var obj in _pooledObjects)
                     _onClearAction?.Invoke(obj);
 
-            _countAll = 0;
+            CountAll = 0;
             _pooledObjects.Clear();
         }
 
@@ -80,11 +78,11 @@ namespace Game.Scripts.Core
         {
             T buffer;
 
-            for (int i = 0; i < _pooledAtStart; i++)
+            for (var i = 0; i < _pooledAtStart; i++)
             {
                 buffer = _createFunction();
-                _countAll++;
-                buffer.gameObject.name += $" ({_countAll})";
+                CountAll++;
+                buffer.gameObject.name += $" ({CountAll})";
                 _pooledObjects.Add(buffer);
             }
         }

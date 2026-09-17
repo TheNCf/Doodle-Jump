@@ -9,20 +9,20 @@ namespace Game.Scripts.Gameplay
 {
     public class LevelGenerator : IInitializable, IDisposable
     {
-        const float HundredPercent = 100.0f;
-        
-        private GameBalance _gameBalance;
-        private CameraView _cameraView;
-        private ObjectShifter _objectShifter;
-        private PlatformSpawner _platformSpawner;
-        private PlayerCharacterView _playerCharacterView;
+        private const float HundredPercent = 100.0f;
+        private readonly CameraView _cameraView;
+
+        private readonly PlatformConfigSelector _configSelector = new();
+
+        private readonly GameBalance _gameBalance;
+        private readonly ObjectShifter _objectShifter;
+        private readonly PlatformSpawner _platformSpawner;
+        private readonly PlayerCharacterView _playerCharacterView;
+        private DifficultyTier _currentDifficulty;
+        private float _elevationLowering;
+        private float _spawnAdditionalHeight;
 
         private float _spawnTrigger = -15.0f;
-        private float _spawnAdditionalHeight;
-        private float _elevationLowering = 0.0f;
-
-        private PlatformConfigSelector _configSelector = new();
-        private DifficultyTier _currentDifficulty;
 
         public LevelGenerator(GameBalance gameBalance, CameraView cameraView, ObjectShifter objectShifter,
             PlatformSpawner platformSpawner, PlayerCharacterView playerCharacterView)
@@ -34,6 +34,12 @@ namespace Game.Scripts.Gameplay
             _playerCharacterView = playerCharacterView;
         }
 
+        public void Dispose()
+        {
+            _objectShifter.RelativeHeightChanged -= OnHeightChanged;
+            _objectShifter.ReturnedBackByValue -= OnReturn;
+        }
+
         public void Initialize()
         {
             _spawnAdditionalHeight = _cameraView.Size.y;
@@ -43,36 +49,30 @@ namespace Game.Scripts.Gameplay
             _objectShifter.ReturnedBackByValue += OnReturn;
         }
 
-        public void Dispose()
-        {
-            _objectShifter.RelativeHeightChanged -= OnHeightChanged;
-            _objectShifter.ReturnedBackByValue -= OnReturn;
-        }
-
         private void OnHeightChanged(float height)
         {
             while (height > _spawnTrigger)
             {
                 _currentDifficulty = _gameBalance.GetTier(_objectShifter.TotalHeight);
-                
-                float jumpHeight = PhysicsUtils.GetJumpHeight(
+
+                var jumpHeight = PhysicsUtils.GetJumpHeight(
                     _playerCharacterView.Rigidbody.gravityScale,
                     _playerCharacterView.JumpStrength);
-                
-                float elevationPercent = Random.Range(_currentDifficulty.NextSpawnMinElevationPercent,
+
+                var elevationPercent = Random.Range(_currentDifficulty.NextSpawnMinElevationPercent,
                     _currentDifficulty.NextSpawnMaxElevationPercent);
-                
-                float elevation = (jumpHeight - _elevationLowering) * elevationPercent / HundredPercent;
-                float spawnHeight = _spawnAdditionalHeight + _spawnTrigger;
-                
-                bool isStructure = Random.Range(0, 100) <= _currentDifficulty.StructureChancePercent;
-                bool structureListNotEmpty = _currentDifficulty.AvailableStructures.Count > 0;
-                
+
+                var elevation = (jumpHeight - _elevationLowering) * elevationPercent / HundredPercent;
+                var spawnHeight = _spawnAdditionalHeight + _spawnTrigger;
+
+                var isStructure = Random.Range(0, HundredPercent) <= _currentDifficulty.StructureChancePercent;
+                var structureListNotEmpty = _currentDifficulty.AvailableStructures.Count > 0;
+
                 if (isStructure && structureListNotEmpty)
                 {
-                    int randomIndex = Random.Range(0, _currentDifficulty.AvailableStructures.Count);
-                    Vector2 position = new Vector2(0, spawnHeight);
-                    
+                    var randomIndex = Random.Range(0, _currentDifficulty.AvailableStructures.Count);
+                    var position = new Vector2(0, spawnHeight);
+
                     elevation += _platformSpawner.SpawnStructure(
                         _currentDifficulty.AvailableStructures[randomIndex],
                         position,
@@ -81,15 +81,15 @@ namespace Game.Scripts.Gameplay
                 }
                 else
                 {
-                    float cameraHalfWidth = _cameraView.Size.x / 2.0f;
-                    float randomX = Random.Range(-cameraHalfWidth, cameraHalfWidth);
-                    Vector2 position = new Vector2(randomX, spawnHeight);
-                    BounceConfig config = _configSelector.GetRandomBounceConfig(_currentDifficulty);
-                    
+                    var cameraHalfWidth = _cameraView.Size.x / 2.0f;
+                    var randomX = Random.Range(-cameraHalfWidth, cameraHalfWidth);
+                    var position = new Vector2(randomX, spawnHeight);
+                    var config = _configSelector.GetRandomBounceConfig(_currentDifficulty);
+
                     _platformSpawner.SpawnSingle(
-                        config, 
-                        position, 
-                        _spawnTrigger, 
+                        config,
+                        position,
+                        _spawnTrigger,
                         _spawnAdditionalHeight);
 
                     if (elevation <= 0f)
@@ -104,7 +104,7 @@ namespace Game.Scripts.Gameplay
                     if (config.Type == BounceType.Broken)
                         _elevationLowering = elevation;
                 }
-                
+
                 _spawnTrigger += elevation;
             }
         }

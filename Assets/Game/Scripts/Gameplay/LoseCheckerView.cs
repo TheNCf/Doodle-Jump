@@ -5,8 +5,8 @@ namespace Game.Scripts.Gameplay
 {
     public class LoseCheckerView : MonoBehaviour
     {
-        private Vector3 _gizmosExtends = new (5.0f, 0, 0);
-        
+        private readonly Vector3 _gizmosExtends = new(5.0f, 0, 0);
+
         public Action Lose;
 
         private void OnDrawGizmosSelected()
@@ -19,7 +19,7 @@ namespace Game.Scripts.Gameplay
         {
             if (other.GetComponent<PlayerCharacterView>())
                 Lose?.Invoke();
-            
+
             if (other.GetComponentInParent<PlayerCharacterView>())
                 Lose?.Invoke();
         }

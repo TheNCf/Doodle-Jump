@@ -16,7 +16,7 @@ namespace Game.Scripts.Core.Animation
             var animationStreams =
                 animatables.Select(a => a.Interface.Animation.Play());
 
-            Observable.WhenAll(animationStreams)
+            animationStreams.WhenAll()
                 .Subscribe(_ => { onComplete?.Invoke(); })
                 .AddTo(addTo);
         }

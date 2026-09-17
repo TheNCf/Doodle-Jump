@@ -11,8 +11,8 @@ namespace Game.Scripts.Gameplay
         private readonly PlayerCharacterView _playerCharacterView;
 
         private readonly Rigidbody2D _rigidbody;
-        private readonly Transform _transform;
         private readonly SpriteRenderer _spriteRenderer;
+        private readonly Transform _transform;
 
         public PlayerCharacterMover(IInputService inputService, PlayerCharacterView playerCharacterView,
             CameraView cameraView)

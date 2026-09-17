@@ -16,8 +16,6 @@ namespace Game.Scripts.Gameplay
         [SerializeField] private float _jumpStrength = 8.0f;
         [SerializeField] private float _heightToShift = 1.0f;
 
-        public event Action<Collision2D> LegsColliding;
-
         public Rigidbody2D Rigidbody => _rigidbody;
         public Transform Transform => _transform;
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
@@ -34,12 +32,6 @@ namespace Game.Scripts.Gameplay
             LegsColliding?.Invoke(other);
         }
 
-        public float GetJumpHeight()
-        {
-            float gravity = Mathf.Abs(Physics2D.gravity.y);
-            float effectiveGravity = gravity * _rigidbody.gravityScale;
-            float height = (_jumpStrength * _jumpStrength) / (2.0f * effectiveGravity);
-            return height;
-        }
+        public event Action<Collision2D> LegsColliding;
     }
 }

@@ -7,18 +7,21 @@ namespace Game.Scripts.Core
 {
     public class InputService : IInputService, IInitializable, IDisposable
     {
-        private PlayerInputActions _inputActions;
-
-        private float _horizontalInput;
-
-        public event Action ShootPressed;
+        private readonly PlayerInputActions _inputActions;
 
         public InputService()
         {
             _inputActions = new PlayerInputActions();
         }
 
-        public float HorizontalInput => _horizontalInput;
+        public void Dispose()
+        {
+            _inputActions.Disable();
+
+            UnsubscribeFromInputEvents();
+
+            _inputActions.Dispose();
+        }
 
         public void Initialize()
         {
@@ -30,14 +33,9 @@ namespace Game.Scripts.Core
             SubscribeToInputEvents();
         }
 
-        public void Dispose()
-        {
-            _inputActions.Disable();
+        public event Action ShootPressed;
 
-            UnsubscribeFromInputEvents();
-
-            _inputActions.Dispose();
-        }
+        public float HorizontalInput { get; private set; }
 
         private void SubscribeToInputEvents()
         {
@@ -59,7 +57,7 @@ namespace Game.Scripts.Core
 
         private void OnMoveInput(InputAction.CallbackContext obj)
         {
-            _horizontalInput = obj.ReadValue<Vector3>().x;
+            HorizontalInput = obj.ReadValue<Vector3>().x;
         }
 
         private void OnShootInput(InputAction.CallbackContext obj)

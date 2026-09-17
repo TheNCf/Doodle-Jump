@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace Game.Scripts.Gameplay.LevelGeneration
 {
-    [System.Serializable]
+    [Serializable]
     public struct PlatformChance
     {
         [field: SerializeField] public BounceConfig Config { get; private set; }

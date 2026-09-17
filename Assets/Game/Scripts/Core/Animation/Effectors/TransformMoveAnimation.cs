@@ -8,11 +8,11 @@ namespace Game.Scripts.Core.Animation.Effectors
 {
     public class TransformMoveAnimation : IAnimation, IDisposable
     {
-        private readonly Transform _target;
+        private readonly float _delay;
         private readonly Vector2 _delta;
         private readonly float _duration;
-        private readonly float _delay;
         private readonly Ease _ease;
+        private readonly Transform _target;
 
         private Tween _tween;
 

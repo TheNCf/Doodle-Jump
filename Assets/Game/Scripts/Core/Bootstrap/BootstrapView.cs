@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Game.Scripts.Core.Animation;
-using Game.Scripts.Core.Animation.Views;
 using UnityEngine;
 
 namespace Game.Scripts.Core.Bootstrap

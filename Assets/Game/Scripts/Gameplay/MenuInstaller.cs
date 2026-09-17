@@ -1,4 +1,3 @@
-using Game.Scripts.Core.SceneLoader;
 using UnityEngine;
 using Zenject;
 

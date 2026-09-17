@@ -1,6 +1,5 @@
 using System;
 using MVVM;
-//using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using Zenject;
@@ -10,13 +9,6 @@ namespace SampleGame
 {
     public sealed class MonoViewBinder : MonoBehaviour
     {
-        private enum BindingMode
-        {
-            FromInstance = 0,
-            FromResolve = 1,
-            FromResolveId = 2
-        }
-
         [SerializeField] private BindingMode viewBinding;
 
         [SerializeField] private Object view;
@@ -33,13 +25,13 @@ namespace SampleGame
 
         [SerializeField] private string viewModelId;
 
-        [Inject] private DiContainer diContainer;
-
         private IBinder _binder;
+
+        [Inject] private DiContainer diContainer;
 
         private void Awake()
         {
-            _binder = this.CreateBinder();
+            _binder = CreateBinder();
         }
 
         private void OnEnable()
@@ -54,24 +46,31 @@ namespace SampleGame
 
         private IBinder CreateBinder()
         {
-            object view = this.viewBinding switch
+            var view = viewBinding switch
             {
                 BindingMode.FromInstance => this.view,
-                BindingMode.FromResolve => this.diContainer.Resolve(this.viewType.GetClass()),
-                BindingMode.FromResolveId => this.diContainer.ResolveId(this.viewType.GetClass(), this.viewId),
-                _ => throw new Exception($"Binding type of view {this.viewBinding} is not found!")
+                BindingMode.FromResolve => diContainer.Resolve(viewType.GetClass()),
+                BindingMode.FromResolveId => diContainer.ResolveId(viewType.GetClass(), viewId),
+                _ => throw new Exception($"Binding type of view {viewBinding} is not found!")
             };
 
-            object model = this.viewModelBinding switch
+            var model = viewModelBinding switch
             {
-                BindingMode.FromInstance => this.viewModel,
-                BindingMode.FromResolve => this.diContainer.Resolve(this.viewModelType.GetClass()),
+                BindingMode.FromInstance => viewModel,
+                BindingMode.FromResolve => diContainer.Resolve(viewModelType.GetClass()),
                 BindingMode.FromResolveId =>
-                    this.diContainer.ResolveId(this.viewModelType.GetClass(), this.viewModelId),
-                _ => throw new Exception($"Binding type of view {this.viewBinding} is not found!")
+                    diContainer.ResolveId(viewModelType.GetClass(), viewModelId),
+                _ => throw new Exception($"Binding type of view {viewBinding} is not found!")
             };
 
             return BinderFactory.CreateComposite(view, model);
+        }
+
+        private enum BindingMode
+        {
+            FromInstance = 0,
+            FromResolve = 1,
+            FromResolveId = 2
         }
     }
 }

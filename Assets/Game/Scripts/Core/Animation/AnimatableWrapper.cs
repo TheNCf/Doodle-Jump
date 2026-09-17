@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.Scripts.Core.Animation
 {
     [Serializable]
     public struct AnimatableWrapper
     {
-        [SerializeField] private UnityEngine.Object _targetObject;
+        [SerializeField] private Object _targetObject;
 
         public IAnimatable Interface => _targetObject as IAnimatable;
 

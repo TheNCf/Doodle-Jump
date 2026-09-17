@@ -6,15 +6,15 @@ namespace Game.Scripts.Gameplay
 {
     public class MovingBehaviour : ITickable
     {
-        private IMovable _movable;
-        private CameraView _cameraView;
+        private readonly float _cameraHalfWidth;
+        private readonly CameraView _cameraView;
+        private float _horizontalDirection = 1.0f;
+        private bool _isFalling;
 
-        private bool _isInitialized = false;
-        private bool _isFalling = false;
+        private bool _isInitialized;
+        private IMovable _movable;
 
         private float _platformHalfWidth;
-        private float _cameraHalfWidth;
-        private float _horizontalDirection = 1.0f;
 
         public MovingBehaviour(CameraView cameraView)
         {
@@ -24,6 +24,12 @@ namespace Game.Scripts.Gameplay
         }
 
         public bool IsEnabled { get; set; }
+
+        public void Tick()
+        {
+            MoveHorizontally();
+            Fall();
+        }
 
         public void Initialize(IMovable movable, float width)
         {
@@ -38,12 +44,6 @@ namespace Game.Scripts.Gameplay
             _isInitialized = true;
         }
 
-        public void Tick()
-        {
-            MoveHorizontally();
-            Fall();
-        }
-
         private void EnableFall(Collider2D _)
         {
             _isFalling = true;
@@ -51,7 +51,7 @@ namespace Game.Scripts.Gameplay
 
         private void MoveHorizontally()
         {
-            if (IsEnabled == false || _isInitialized == false || _movable is null || _isFalling == true)
+            if (!IsEnabled || !_isInitialized || _movable is null || _isFalling)
                 return;
 
             if (_movable.Transform.position.x * _horizontalDirection > _cameraHalfWidth - _platformHalfWidth)
@@ -62,7 +62,7 @@ namespace Game.Scripts.Gameplay
 
         private void Fall()
         {
-            if (_isFalling == false || _isInitialized == false || _movable is null)
+            if (!_isFalling || !_isInitialized || _movable is null)
                 return;
 
             _movable.Transform.Translate(0, _movable.FallSpeed * Time.deltaTime, 0);

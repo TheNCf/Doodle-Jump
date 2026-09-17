@@ -8,11 +8,11 @@ namespace Game.Scripts.Core.Animation.Effectors
 {
     public class ImageFadeAnimation : IAnimation, IDisposable
     {
+        private readonly float _delay;
+        private readonly float _duration;
+        private readonly Ease _ease;
         private readonly Image _target;
         private readonly float _to;
-        private readonly float _duration;
-        private readonly float _delay;
-        private readonly Ease _ease;
 
         private Tween _tween;
 

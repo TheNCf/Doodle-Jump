@@ -6,10 +6,10 @@ namespace Game.Scripts.Core.Bootstrap
 {
     public class Bootstrapper : IInitializable
     {
-        private SceneLoader.SceneLoader _sceneLoader;
-        private SceneLoaderSettings _settings;
-        private BootstrapView _bootstrapView;
-        private AnimationStarter _animationStarter;
+        private readonly AnimationStarter _animationStarter;
+        private readonly BootstrapView _bootstrapView;
+        private readonly SceneLoader.SceneLoader _sceneLoader;
+        private readonly SceneLoaderSettings _settings;
 
         public Bootstrapper(SceneLoaderSettings settings, SceneLoader.SceneLoader sceneLoader,
             BootstrapView bootstrapView, AnimationStarter animationStarter)

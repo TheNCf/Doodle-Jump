@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace Game.Scripts.Core
 {
@@ -11,7 +12,7 @@ namespace Game.Scripts.Core
         {
             T Create()
             {
-                T spawnedObject = container.InstantiatePrefabForComponent<T>(prefab);
+                var spawnedObject = container.InstantiatePrefabForComponent<T>(prefab);
                 spawnedObject.gameObject.SetActive(false);
                 return spawnedObject;
             }
@@ -31,7 +32,7 @@ namespace Game.Scripts.Core
             void OnClear(T item)
             {
                 if (item != null && item.gameObject != null)
-                    UnityEngine.Object.Destroy(item.gameObject);
+                    Object.Destroy(item.gameObject);
             }
 
             return new ObjectPool<T>(Create, OnGet, OnRelease, OnClear, initialSize);

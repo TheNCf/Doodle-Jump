@@ -8,14 +8,14 @@ namespace Game.Scripts.Core.Animation.Effectors
 {
     public class RectTransformDropAnimation : IAnimation, IDisposable
     {
-        private readonly RectTransform _target;
+        private readonly float _delay;
+        private readonly float _duration;
+        private readonly Ease _ease;
         private readonly float _from;
         private readonly float _min;
+        private readonly RectTransform _target;
         private readonly float _to;
-        private readonly float _duration;
         private readonly float _toMinDurationFraction;
-        private readonly float _delay;
-        private readonly Ease _ease;
 
         private Tween _tween;
 

@@ -2,14 +2,13 @@ using System;
 using MVVM;
 using TMPro;
 using UniRx;
-using UnityEngine;
 
 namespace Game.Scripts.UI.Binders
 {
     public class TextBinder : IBinder, IObserver<string>
     {
-        private readonly TMP_Text _view;
         private readonly IReadOnlyReactiveProperty<string> _property;
+        private readonly TMP_Text _view;
         private IDisposable _handle;
 
         public TextBinder(TMP_Text view, IReadOnlyReactiveProperty<string> property)

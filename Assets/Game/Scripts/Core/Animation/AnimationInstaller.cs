@@ -1,4 +1,3 @@
-using Game.Scripts.Core.Animation.Effectors;
 using Zenject;
 
 namespace Game.Scripts.Core.Animation

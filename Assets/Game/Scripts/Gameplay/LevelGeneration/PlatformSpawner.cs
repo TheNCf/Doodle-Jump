@@ -6,11 +6,11 @@ namespace Game.Scripts.Gameplay.LevelGeneration
     public class PlatformSpawner
     {
         private const float HundredPercent = 100.0f;
-        
-        private ShiftRegistry _shiftRegistry;
-        private PlatformDisposer _disposer;
+        private readonly PlatformDisposer _disposer;
 
-        private ObjectPool<PlatformView> _pool;
+        private readonly ObjectPool<PlatformView> _pool;
+
+        private readonly ShiftRegistry _shiftRegistry;
 
         public PlatformSpawner(ObjectPool<PlatformView> pool, ShiftRegistry shiftRegistry, PlatformDisposer disposer)
         {
@@ -25,20 +25,20 @@ namespace Game.Scripts.Gameplay.LevelGeneration
         public PlatformView SpawnSingle(BounceConfig config, Vector2 position, float spawnHeight,
             float distanceFromCenter)
         {
-            PlatformView view = _pool.Get();
+            var view = _pool.Get();
             view.Initialize(config, spawnHeight, distanceFromCenter);
             view.transform.position = position;
-            
+
             if (Random.value * HundredPercent < config.SpringChance)
             {
-                float localX = Random.Range(-view.BounceView.SpriteRenderer.bounds.extents.x,
+                var localX = Random.Range(-view.BounceView.SpriteRenderer.bounds.extents.x,
                     view.BounceView.SpriteRenderer.bounds.extents.x);
-                Vector3 localPosition = view.SpringBounceView.transform.localPosition;
+                var localPosition = view.SpringBounceView.transform.localPosition;
                 localPosition.x = localX;
                 view.SpringBounceView.transform.localPosition = localPosition;
                 view.SpringBounceView.Initialize(view.SpringConfig);
             }
-            
+
             _shiftRegistry.Register(view);
             _disposer.AddForTracking(view);
             return view;
@@ -47,7 +47,7 @@ namespace Game.Scripts.Gameplay.LevelGeneration
         public float SpawnStructure(PlatformStructure structure, Vector2 position, float spawnHeight,
             float distanceFromCenter)
         {
-            foreach (PlatformSpawnData data in structure.Data)
+            foreach (var data in structure.Data)
                 SpawnSingle(
                     data.Config,
                     position + data.RelativePosition,
@@ -61,7 +61,7 @@ namespace Game.Scripts.Gameplay.LevelGeneration
         {
             if (obj is not PlatformView platform)
                 return;
-            
+
             _disposer.RemoveFromTracking(platform);
             _shiftRegistry.Unregister(platform);
             _pool.Release(platform);

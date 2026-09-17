@@ -1,6 +1,5 @@
 using System;
 using MVVM;
-using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -8,8 +7,8 @@ namespace Game.Scripts.UI.Binders
 {
     public class ButtonBinder : IBinder
     {
-        private readonly Button _view;
         private readonly UnityAction _modelAction;
+        private readonly Button _view;
 
         public ButtonBinder(Button view, Action model)
         {

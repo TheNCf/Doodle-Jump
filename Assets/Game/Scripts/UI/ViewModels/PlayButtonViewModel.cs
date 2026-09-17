@@ -1,13 +1,12 @@
 using Game.Scripts.Core.SceneLoader;
 using MVVM;
-using Zenject;
 
 namespace Game.Scripts.UI.ViewModels
 {
     public class PlayButtonViewModel
     {
-        private SceneLoader _sceneLoader;
-        private SceneLoaderSettings _sceneLoaderSettings;
+        private readonly SceneLoader _sceneLoader;
+        private readonly SceneLoaderSettings _sceneLoaderSettings;
 
         public PlayButtonViewModel(SceneLoader sceneLoader, SceneLoaderSettings sceneLoaderSettings)
         {

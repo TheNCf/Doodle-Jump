@@ -6,7 +6,7 @@ namespace Game.Scripts.Core.SceneLoader
 {
     public class SceneLoader
     {
-        private SignalBus _signalBus;
+        private readonly SignalBus _signalBus;
 
         private AsyncOperation _loadingOperation;
 

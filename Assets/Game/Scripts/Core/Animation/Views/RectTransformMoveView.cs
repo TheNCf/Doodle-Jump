@@ -6,8 +6,10 @@ namespace Game.Scripts.Core.Animation.Views
     public class RectTransformMoveView : MonoBehaviour, IAnimatable
     {
         [field: SerializeField] public RectTransform RectTransform { get; private set; }
-        [field: SerializeField] public ObjectAnimationData AnimationData { get; private set; }
         [field: SerializeField] public Vector3 To { get; private set; }
+
+        private IAnimation _animation;
+        [field: SerializeField] public ObjectAnimationData AnimationData { get; private set; }
 
         public IAnimation Animation
         {
@@ -15,11 +17,9 @@ namespace Game.Scripts.Core.Animation.Views
             {
                 if (_animation == null)
                     _animation = new RectTransformMoveAnimation(this);
-                
+
                 return _animation;
             }
         }
-
-        private IAnimation _animation;
     }
 }

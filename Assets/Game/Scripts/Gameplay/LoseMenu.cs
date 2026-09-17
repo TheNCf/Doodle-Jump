@@ -1,5 +1,4 @@
 using System;
-using Game.Scripts.Core.Ads;
 using Game.Scripts.Core.Animation;
 using Zenject;
 
@@ -7,9 +6,9 @@ namespace Game.Scripts.Gameplay
 {
     public class LoseMenu : IInitializable, IDisposable
     {
-        private LoseMenuView _view;
-        private SignalBus _signalBus;
-        private AnimationStarter _animationStarter;
+        private readonly AnimationStarter _animationStarter;
+        private readonly SignalBus _signalBus;
+        private readonly LoseMenuView _view;
 
         public LoseMenu(LoseMenuView view, SignalBus signalBus, AnimationStarter animationStarter)
         {
@@ -18,14 +17,14 @@ namespace Game.Scripts.Gameplay
             _animationStarter = animationStarter;
         }
 
-        public void Initialize()
-        {
-            _signalBus.Subscribe<LoseSignal>(OnLose);
-        }
-
         public void Dispose()
         {
             _signalBus.Unsubscribe<LoseSignal>(OnLose);
+        }
+
+        public void Initialize()
+        {
+            _signalBus.Subscribe<LoseSignal>(OnLose);
         }
 
         private void OnLose()

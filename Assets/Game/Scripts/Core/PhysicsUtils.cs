@@ -6,9 +6,9 @@ namespace Game.Scripts.Core
     {
         public static float GetJumpHeight(float gravityScale, float jumpStrength)
         {
-            float gravity = Mathf.Abs(Physics2D.gravity.y);
-            float effectiveGravity = gravity * gravityScale;
-            float height = (jumpStrength * jumpStrength) / (2.0f * effectiveGravity);
+            var gravity = Mathf.Abs(Physics2D.gravity.y);
+            var effectiveGravity = gravity * gravityScale;
+            var height = jumpStrength * jumpStrength / (2.0f * effectiveGravity);
             return height;
         }
     }

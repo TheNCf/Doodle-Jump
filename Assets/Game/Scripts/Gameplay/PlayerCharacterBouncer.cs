@@ -6,10 +6,10 @@ namespace Game.Scripts.Gameplay
 {
     public class PlayerCharacterBouncer : IFixedTickable, IDisposable
     {
+        private readonly Collider2D _legCollider;
         private readonly PlayerCharacterView _playerCharacterView;
 
         private readonly Rigidbody2D _rigidbody;
-        private readonly Collider2D _legCollider;
 
         public PlayerCharacterBouncer(PlayerCharacterView playerCharacterView)
         {
@@ -21,22 +21,22 @@ namespace Game.Scripts.Gameplay
             _playerCharacterView.LegsColliding += Bounce;
         }
 
-        public void FixedTick()
-        {
-            ToggleLegs();
-        }
-
         public void Dispose()
         {
             _playerCharacterView.LegsColliding -= Bounce;
         }
 
+        public void FixedTick()
+        {
+            ToggleLegs();
+        }
+
         private void Bounce(Collision2D collision)
         {
-            if (collision.collider.TryGetComponent(out IBounceable bounceable) == false)
+            if (!collision.collider.TryGetComponent(out IBounceable bounceable))
                 return;
 
-            Vector2 newVelocity = _rigidbody.velocity;
+            var newVelocity = _rigidbody.velocity;
             newVelocity.y = bounceable.BounceMultiplier * _playerCharacterView.JumpStrength;
             _rigidbody.velocity = newVelocity;
         }

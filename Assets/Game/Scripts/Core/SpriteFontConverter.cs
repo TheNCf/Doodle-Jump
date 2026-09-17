@@ -4,9 +4,9 @@ namespace Game.Scripts.Core
     {
         public static string Parse(string input)
         {
-            string output = "";
+            var output = "";
 
-            foreach (char symbol in input)
+            foreach (var symbol in input)
                 output += $"<sprite name=\"{symbol}\">";
 
             return output;

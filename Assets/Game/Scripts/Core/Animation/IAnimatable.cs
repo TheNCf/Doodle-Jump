@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.UI;
-
 namespace Game.Scripts.Core.Animation
 {
     public interface IAnimatable

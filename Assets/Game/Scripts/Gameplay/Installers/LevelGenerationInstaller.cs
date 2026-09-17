@@ -6,8 +6,8 @@ namespace Game.Scripts.Gameplay.Installers
 {
     public class LevelGenerationInstaller : Installer<PlatformView, int, LevelGenerationInstaller>
     {
-        private readonly PlatformView _platformPrefab;
         private readonly int _initialPoolSize;
+        private readonly PlatformView _platformPrefab;
 
         public LevelGenerationInstaller(PlatformView platformPrefab, int initialPoolSize)
         {
@@ -68,8 +68,8 @@ namespace Game.Scripts.Gameplay.Installers
                     Container,
                     _platformPrefab,
                     _initialPoolSize,
-                    onGet: platform => platform.Activate(),
-                    onRelease: platform => platform.ResetObject()
+                    platform => platform.Activate(),
+                    platform => platform.ResetObject()
                 ))
                 .AsSingle();
         }

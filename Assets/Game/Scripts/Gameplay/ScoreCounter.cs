@@ -5,28 +5,27 @@ namespace Game.Scripts.Gameplay
 {
     public class ScoreCounter : IInitializable, IDisposable
     {
-        private ObjectShifter _shifter;
-
-        private float _scoreMultiplier = 50.0f;
-
-        public event Action<int> ScoreChanged;
+        private readonly float _scoreMultiplier = 50.0f;
+        private readonly ObjectShifter _shifter;
 
         public ScoreCounter(ObjectShifter shifter)
         {
             _shifter = shifter;
         }
 
-        public int Score { get; private set; } = 0;
+        public int Score { get; private set; }
+
+        public void Dispose()
+        {
+            _shifter.TotalHeightChanged -= OnHeightChanged;
+        }
 
         public void Initialize()
         {
             _shifter.TotalHeightChanged += OnHeightChanged;
         }
 
-        public void Dispose()
-        {
-            _shifter.TotalHeightChanged -= OnHeightChanged;
-        }
+        public event Action<int> ScoreChanged;
 
         private void OnHeightChanged(float height)
         {

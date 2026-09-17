@@ -7,17 +7,13 @@ namespace Game.Scripts.Gameplay
 {
     public class ObjectShifter : IInitializable, IDisposable, ILateTickable
     {
-        private PlayerCharacterView _playerCharacterView;
-        private ShiftRegistry _shiftRegistry;
-        private CameraView _cameraView;
-        private SignalBus _signalBus;
+        private readonly CameraView _cameraView;
 
-        private float _heightThreshold = 10.0f;
-        private bool _isGameEnded = false;
-
-        public event Action<float> ReturnedBackByValue;
-        public event Action<float> RelativeHeightChanged;
-        public event Action<float> TotalHeightChanged;
+        private readonly float _heightThreshold = 10.0f;
+        private readonly PlayerCharacterView _playerCharacterView;
+        private readonly ShiftRegistry _shiftRegistry;
+        private readonly SignalBus _signalBus;
+        private bool _isGameEnded;
 
         public ObjectShifter(PlayerCharacterView playerCharacterView, ShiftRegistry shiftRegistry,
             CameraView cameraView, SignalBus signalBus)
@@ -28,17 +24,17 @@ namespace Game.Scripts.Gameplay
             _signalBus = signalBus;
         }
 
-        public float RelativeHeight { get; private set; } = 0.0f;
-        public float TotalHeight { get; private set; } = 0.0f;
-
-        public void Initialize()
-        {
-            _signalBus.Subscribe<LoseSignal>(OnLose);
-        }
+        public float RelativeHeight { get; private set; }
+        public float TotalHeight { get; private set; }
 
         public void Dispose()
         {
             _signalBus.Unsubscribe<LoseSignal>(OnLose);
+        }
+
+        public void Initialize()
+        {
+            _signalBus.Subscribe<LoseSignal>(OnLose);
         }
 
         public void LateTick()
@@ -50,14 +46,18 @@ namespace Game.Scripts.Gameplay
             TryReturnToCenter();
         }
 
+        public event Action<float> ReturnedBackByValue;
+        public event Action<float> RelativeHeightChanged;
+        public event Action<float> TotalHeightChanged;
+
         private void TryToShift()
         {
             if (_playerCharacterView.Transform.position.y <=
                 _playerCharacterView.HeightToShift + _cameraView.Transform.position.y)
                 return;
 
-            float shift = _playerCharacterView.Transform.position.y -
-                          (_playerCharacterView.HeightToShift + _cameraView.Transform.position.y);
+            var shift = _playerCharacterView.Transform.position.y -
+                        (_playerCharacterView.HeightToShift + _cameraView.Transform.position.y);
             RelativeHeight += shift;
             TotalHeight += shift;
             _cameraView.Transform.Translate(0, shift, 0);
@@ -71,7 +71,7 @@ namespace Game.Scripts.Gameplay
             if (_cameraView.Transform.position.y < _heightThreshold || _playerCharacterView.Rigidbody.velocity.y > 0)
                 return;
 
-            Vector3 shiftVector = new Vector3(0, _heightThreshold);
+            var shiftVector = new Vector3(0, _heightThreshold);
 
             _playerCharacterView.Rigidbody.position -= (Vector2)shiftVector;
             _playerCharacterView.Transform.position -= shiftVector;
@@ -79,7 +79,7 @@ namespace Game.Scripts.Gameplay
 
             _cameraView.Transform.position -= shiftVector;
 
-            foreach (IShiftable shiftable in _shiftRegistry.Shiftables)
+            foreach (var shiftable in _shiftRegistry.Shiftables)
                 shiftable.ShiftDown(_heightThreshold);
 
             ReturnedBackByValue?.Invoke(_heightThreshold);

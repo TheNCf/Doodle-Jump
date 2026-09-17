@@ -6,8 +6,8 @@ namespace Game.Scripts.Gameplay
 {
     public class GameAdHandler : IInitializable, IDisposable
     {
-        private SignalBus _signalBus;
-        private AdService _adService;
+        private readonly AdService _adService;
+        private readonly SignalBus _signalBus;
 
         public GameAdHandler(SignalBus signalBus, AdService adService)
         {
@@ -15,14 +15,14 @@ namespace Game.Scripts.Gameplay
             _adService = adService;
         }
 
-        public void Initialize()
-        {
-            _signalBus.Subscribe<LoseSignal>(OnLose);
-        }
-
         public void Dispose()
         {
             _signalBus.Unsubscribe<LoseSignal>(OnLose);
+        }
+
+        public void Initialize()
+        {
+            _signalBus.Subscribe<LoseSignal>(OnLose);
         }
 
         private void OnLose()

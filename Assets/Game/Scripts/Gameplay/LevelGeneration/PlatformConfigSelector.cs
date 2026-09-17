@@ -11,7 +11,7 @@ namespace Game.Scripts.Gameplay.LevelGeneration
             foreach (var item in difficultyTier.PlatformChances)
                 totalWeight += item.Weight;
 
-            float randomValue = Random.Range(0, totalWeight);
+            var randomValue = Random.Range(0, totalWeight);
             float currentWeightSum = 0;
 
             foreach (var item in difficultyTier.PlatformChances)

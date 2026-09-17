@@ -8,8 +8,14 @@ namespace Game.Scripts.Gameplay
 
         public IReadOnlyCollection<IShiftable> Shiftables => _shiftables;
 
-        public void Register(IShiftable shiftable) => _shiftables.Add(shiftable);
+        public void Register(IShiftable shiftable)
+        {
+            _shiftables.Add(shiftable);
+        }
 
-        public void Unregister(IShiftable shiftable) => _shiftables.Remove(shiftable);
+        public void Unregister(IShiftable shiftable)
+        {
+            _shiftables.Remove(shiftable);
+        }
     }
 }
